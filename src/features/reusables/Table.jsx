@@ -149,6 +149,8 @@ const Table = ({ status, date, api = [], deleted, updated, view, runPrint, print
           </tr>
         </thead>
         <tbody>
+
+                {/* content body to be used by passing the api content to */}
           {currentData.map((product, idx) => (
             <tr key={product.saleId}>
               <td>
@@ -201,52 +203,54 @@ const Table = ({ status, date, api = [], deleted, updated, view, runPrint, print
 
 
           ))}
-<tr >
 
-<td>none</td>
-<td>2</td>
-<td>3</td>
-<td>₦ 4</td>
-<td>5</td>
-<td>6</td>
-<td>
-  <div onClick={openAction} className={style.actionMama}>
-    ...
-  </div>
-  {action && (
-    <div className={`${style.action}`} ref={actionRef}>
-      <p
-        className="flex gap-3 text-sm "
-        onClick={() => view(product)}
-      >
-        <EyeIcon size={20} className={style.icon2} />
-        View
-      </p>
-      <hr />
-      <p
-        onClick={() => updated(product)}
-        className="flex gap-3 text-sm "
-      >
-        <Edit2Icon size={20} className={style.icon2} />
-        Edit
-      </p>
-      {/* <hr />
-      <p className="flex gap-3 text-sm ">
-        <Printer size={20} className={style.icon2} />
-        Print
-      </p> */}
-      <hr />
-      <p
-        onClick={() => deleted(product.saleId)}
-        className="flex text-sm gap-3"
-      >
-        <Trash size={20} className={style.icon2} />
-        Delete
-      </p>
-    </div>
-  )}
-</td>
-</tr>
+                    {/* conetent example ad placeholder which should be removed  once api can be consumed */}
+            <tr >
+
+            <td>none</td>
+            <td>2</td>
+            <td>3</td>
+            <td>₦ 4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>
+              <div onClick={openAction} className={style.actionMama}>
+                ...
+              </div>
+              {action && (
+                <div className={`${style.action}`} ref={actionRef}>
+                  <p
+                    className="flex gap-3 text-sm "
+                    onClick={() => view(product)}
+                  >
+                    <EyeIcon size={20} className={style.icon2} />
+                    View
+                  </p>
+                  <hr />
+                  <p
+                    onClick={() => updated(product)}
+                    className="flex gap-3 text-sm "
+                  >
+                    <Edit2Icon size={20} className={style.icon2} />
+                    Edit
+                  </p>
+                  {/* <hr />
+                  <p className="flex gap-3 text-sm ">
+                    <Printer size={20} className={style.icon2} />
+                    Print
+                  </p> */}
+                  <hr />
+                  <p
+                    onClick={() => deleted(product.saleId)}
+                    className="flex text-sm gap-3"
+                  >
+                    <Trash size={20} className={style.icon2} />
+                    Delete
+                  </p>
+                </div>
+              )}
+            </td>
+            </tr>
         </tbody>
       </table>
 
