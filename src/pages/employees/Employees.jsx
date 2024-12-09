@@ -1,4 +1,3 @@
-import React from 'react'
 import SearchAndButtons from '../../features/searchAndButtons/SearchAndButtons'
 import { Download, Plus } from 'lucide-react'
 const buttons = [

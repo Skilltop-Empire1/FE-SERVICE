@@ -1,11 +1,4 @@
-import {
-  Bell,
-  CircleUser,
-  MessageCircle,
-  Settings,
-  UserRound,
-} from 'lucide-react'
-import React from 'react'
+import { Bell, MessageCircle, Settings, UserRound } from 'lucide-react'
 
 import styles from './Topbar.module.css'
 

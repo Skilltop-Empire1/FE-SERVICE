@@ -1,16 +1,8 @@
 import { NavLink } from 'react-router-dom'
 import {
-  Home,
   Users,
-  Briefcase,
-  UserCheck,
-  Package,
-  DollarSign,
-  BarChart2,
-  MessageCircle,
   Settings,
   UserPlus,
-  ClipboardList,
   LogOut,
   LayoutGrid,
   HeartHandshake,
