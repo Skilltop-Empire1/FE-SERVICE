@@ -1,5 +1,12 @@
+import ModalExample from '@src/components/examples/ModalExample'
+
 function Home() {
-  return <div className="bg-red-500 text-white">Hello world!</div>
+  return (
+    <div className="">
+      <h1 className="bg-red-500 text-white">Hello world!</h1>
+      <ModalExample />
+    </div>
+  )
 }
 
 export default Home
