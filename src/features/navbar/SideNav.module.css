@@ -3,6 +3,7 @@
   width: 18.34vw;
   padding: 20px;
   height: 100%;
+  position: fixed;
 }
 
 .navList {
