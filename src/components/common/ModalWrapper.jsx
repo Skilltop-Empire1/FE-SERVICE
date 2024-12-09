@@ -8,7 +8,7 @@ const ModalWrapper = ({
   closeButtonPosition = 'right',
   position = 'center',
   showCloseButton = true,
-  overlayClassName = 'bg-black opacity-50',
+  overlayClassName = 'bg-black opacity-70',
   containerClassName = '',
 }) => {
   return (
