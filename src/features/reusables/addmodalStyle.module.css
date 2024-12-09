@@ -15,12 +15,8 @@
     grid-template-columns: 2fr 2fr;
   }
   
-  .cont {
-    display: flex;
-    flex-direction: column;
-  }
   
-  .label {
+  .form div label {
     font-family: Inter;
     font-size: 14px;
     font-weight: 400;
@@ -29,7 +25,21 @@
     margin: 20px 0 10px 0;
   }
   
-  .input {
+.form div input {
+    width: 450px;
+    /* background: #f4f3f3; */
+    height: 55px;
+    border-radius: 15px;
+    border: 1px solid #3D3D3D;
+    padding: 5px 10px;
+  }
+
+  .form div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form div select {
     width: 450px;
     /* background: #f4f3f3; */
     height: 55px;
