@@ -1,9 +1,13 @@
 .sideNav {
   background-color: #2563eb;
   width: 18.34vw;
-  padding: 20px;
-  height: 100%;
+  height: 100vh;
+  padding: 100px 20px 20px;
   position: fixed;
+  left: 0px;
+  z-index: 9;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .navList {
@@ -56,6 +60,7 @@
   gap: 10px;
   background-color: #ffffff;
   cursor: pointer;
+  margin-top: 16px;
 }
 
 .logout span,
