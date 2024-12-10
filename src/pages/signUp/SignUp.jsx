@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import signUpImage from '../../assets/signupIllustration.svg'
 import style from './SignUp.module.css'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 function SignUp() {
   const [formData, setFormData] = useState({

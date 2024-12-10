@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import loginIllustration from '../../assets/loginIllustration.svg'
 
 import style from './Login.module.css'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
