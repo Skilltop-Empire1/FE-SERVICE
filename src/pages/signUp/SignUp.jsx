@@ -31,9 +31,7 @@ function SignUp() {
   return (
     <div className={style.container}>
       <div className={style.illustrationWrapper}>
-        <div>
-          <img src={signUpImage} alt="Sign Up Illustration" />
-        </div>
+        <img src={signUpImage} alt="Sign Up Illustration" />
       </div>
 
       <div className={style.formWrapper}>

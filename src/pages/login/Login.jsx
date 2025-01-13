@@ -25,9 +25,7 @@ function Login() {
   return (
     <div className={style.container}>
       <div className={style.illustrationWrapper}>
-        <div>
-          <img src={loginIllustration} alt="Brand Logo" />
-        </div>
+        <img src={loginIllustration} alt="Brand Logo" />
       </div>
 
       <div className={style.formWrapper}>
