@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router'
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
 import SignUp from './pages/signup/SignUp'
@@ -14,6 +14,8 @@ import Communications from './pages/communications/Communications'
 import Settings from './pages/settings/Settings'
 import AddEmployee from './pages/addEmployee/AddEmployee'
 import CreateTask from './pages/createTask/CreateTask'
+import AddService from './pages/addService/AddService'
+import NotFound from './pages/notFound/NotFound'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,7 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       {
+        index: true,
         path: 'dashboard',
         element: <Dashboard />,
       },
@@ -43,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: 'services',
         element: <Services />,
+      },
+      {
+        path: 'addServices',
+        element: <AddService />,
       },
       {
         path: 'clients',
@@ -80,7 +87,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/*',
-    element: <h1>Page Not Found</h1>,
+    element: <NotFound />,
   },
 ])
 
