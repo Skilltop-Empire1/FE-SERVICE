@@ -13,12 +13,20 @@
   background-color: #fff;
 }
 
+.hamburger {
+  display: none;
+}
+
 .navContainer ul {
   display: flex;
   flex-direction: row;
   justify-content: right;
   align-items: center;
   gap: 24px;
+}
+
+.navContainer li {
+  cursor: pointer;
 }
 
 .navContainer ul li:last-child {
@@ -30,4 +38,13 @@
   border-radius: 100px;
   background-color: #2563eb;
   color: #fff;
+}
+
+@media (max-width: 810px) {
+  .logo {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
 }

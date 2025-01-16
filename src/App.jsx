@@ -15,6 +15,7 @@ import Settings from './pages/settings/Settings'
 import AddEmployee from './pages/addEmployee/AddEmployee'
 import CreateTask from './pages/createTask/CreateTask'
 import AddService from './pages/addService/AddService'
+import NotFound from './pages/notFound/NotFound'
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       {
+        index: true,
         path: 'dashboard',
         element: <Dashboard />,
       },
@@ -85,7 +87,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/*',
-    element: <h1>Page Not Found</h1>,
+    element: <NotFound />,
   },
 ])
 
