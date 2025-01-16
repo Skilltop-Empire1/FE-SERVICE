@@ -12,12 +12,57 @@ import {
   NotepadText,
   MessageCircleMore,
   Plus,
+  X,
 } from 'lucide-react'
 import styles from './SideNav.module.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleMenu } from '../../redux/slices/toggleMenuSlice'
+import { useEffect, useRef } from 'react'
 
 function SideNav() {
+  const ref = useRef()
+  const dispatch = useDispatch()
+  const isOpen = useSelector((state) => state.toggleMenu.isOpen)
+
+  const isSmallScreen = () => window.innerWidth <= 810
+
+  const handleClickOutsideMenu = (event) => {
+    if (isSmallScreen() && ref.current && !ref.current.contains(event.target)) {
+      dispatch(toggleMenu())
+    }
+  }
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (!isSmallScreen() && isOpen) {
+        dispatch(toggleMenu())
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutsideMenu)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutsideMenu)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [isOpen, dispatch])
+
   return (
-    <nav className={styles.sideNav}>
+    <nav
+      ref={ref}
+      className={`${styles.sideNav} ${isOpen ? styles.showNav : ''}`}
+    >
+      <div
+        onClick={() => dispatch(toggleMenu())}
+        role="button"
+        className={styles.closeMenu}
+      >
+        <X color="#ffffff" />
+      </div>
       <ul className={styles.navList}>
         <div>
           <li>
@@ -145,7 +190,7 @@ function SideNav() {
           </li>
         </div>
       </ul>
-      <div className={styles.logout}>
+      <div role="button" className={styles.logout}>
         <LogOut className={styles.logoutIcon} />
         <span>Logout</span>
       </div>

@@ -10,3 +10,9 @@
   width: 100%;
   margin-left: 240px;
 }
+
+@media (max-width: 810px) {
+  .outlet {
+    margin-left: 0;
+  }
+}

@@ -1,6 +1,7 @@
 .sideNav {
   background-color: #2563eb;
-  width: 18.34vw;
+  min-width: fit-content;
+  max-width: 240px;
   height: 100vh;
   padding: 100px 20px 20px;
   position: fixed;
@@ -17,6 +18,10 @@
   list-style: none;
   padding: 0;
   gap: 200px;
+}
+
+.closeMenu {
+  display: none;
 }
 
 .navList li a {
@@ -71,4 +76,36 @@
   line-height: 28px;
   text-align: left;
   color: #186cce;
+}
+
+@media (max-width: 810px) {
+  .sideNav {
+    display: none;
+  }
+
+  .sideNav.showNav {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    z-index: 11;
+    left: 0;
+  }
+
+  .closeMenu {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #5184f3;
+    width: 48px;
+    height: 48px;
+  }
+
+  .closeMenu:hover {
+    background-color: #007bff;
+  }
 }
