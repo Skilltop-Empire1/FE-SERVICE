@@ -20,7 +20,7 @@ const AddModal = ({header, formContent, close, submit, addAnother, anotherConten
         </div>
         
         {/* button and checkbox to add another */}
-        <div className='grid-cols-2 grid'>
+        <div className='grid-cols-2 grid fixed bottom-5'>
             <div className="mt-8 flex items-center gap-4">
                   <input
                     type="checkbox"

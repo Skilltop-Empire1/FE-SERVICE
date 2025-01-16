@@ -1,4 +1,4 @@
-import ModalExample from '@src/components/examples/ModalExample'
+import ModalExample from "../../components/examples/ModalExample"
 
 function Home() {
   return (

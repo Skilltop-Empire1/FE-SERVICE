@@ -169,14 +169,14 @@ const Table = ({ status, date, api = [], deleted, updated, view, runPrint, print
                   <div className={`${style.action}`} ref={actionRef}>
                     <p
                       className="flex gap-3 text-sm "
-                      onClick={() => view(product)}
+                      onClick={view}
                     >
                       <EyeIcon size={20} className={style.icon2} />
                       View
                     </p>
                     <hr />
                     <p
-                      onClick={() => updated(product)}
+                      onClick={updated}
                       className="flex gap-3 text-sm "
                     >
                       <Edit2Icon size={20} className={style.icon2} />
@@ -189,7 +189,7 @@ const Table = ({ status, date, api = [], deleted, updated, view, runPrint, print
                     </p> */}
                     <hr />
                     <p
-                      onClick={() => deleted(product.saleId)}
+                      onClick={deleted}
                       className="flex text-sm gap-3"
                     >
                       <Trash size={20} className={style.icon2} />
@@ -221,14 +221,14 @@ const Table = ({ status, date, api = [], deleted, updated, view, runPrint, print
                 <div className={`${style.action}`} ref={actionRef}>
                   <p
                     className="flex gap-3 text-sm "
-                    onClick={() => view(product)}
+                    onClick={view}
                   >
                     <EyeIcon size={20} className={style.icon2} />
                     View
                   </p>
                   <hr />
                   <p
-                    onClick={() => updated(product)}
+                    onClick={updated}
                     className="flex gap-3 text-sm "
                   >
                     <Edit2Icon size={20} className={style.icon2} />
@@ -241,7 +241,7 @@ const Table = ({ status, date, api = [], deleted, updated, view, runPrint, print
                   </p> */}
                   <hr />
                   <p
-                    onClick={() => deleted(product.saleId)}
+                    onClick={deleted}
                     className="flex text-sm gap-3"
                   >
                     <Trash size={20} className={style.icon2} />
@@ -254,14 +254,14 @@ const Table = ({ status, date, api = [], deleted, updated, view, runPrint, print
         </tbody>
       </table>
 
-      <div className={`${style.pagination}`}>
+      <div className={`${style.pagination} justify-between`}>
         {/* Pagination buttons */}
         <div>
-        <span>
-          Showing {startIndex + 1} to{" "}
-          {currentPage === totalPages ? api.length : currentPage * itemsPerPage}{" "}
-          of {api.length} entries (Filtered from {api.length} total entries)
-        </span>
+          <span>
+            Showing {startIndex + 1} to{" "}
+            {currentPage === totalPages ? api.length : currentPage * itemsPerPage}{" "}
+            of {api.length} entries (Filtered from {api.length} total entries)
+          </span>
         </div>
         <div className={`${style.pagination}`}>
              <button
@@ -318,6 +318,8 @@ const Table = ({ status, date, api = [], deleted, updated, view, runPrint, print
       {/* <div className="hidden">
         <SelectedRowsComponent ref={printref} />
       </div> */}
+
+
     </div>
   );
 };

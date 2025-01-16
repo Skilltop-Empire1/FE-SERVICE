@@ -11,52 +11,47 @@ const AddService = () => {
 
   const formContent = 
   <>
-    <div >
-            <label >Payment Option</label>
-            <select
-              required
-            >
-              <option value="">Select payment option</option>
-              <option value="full">Full Payment</option>
-              <option value="part_payment">Part Payment</option>
-              <option value="credit">Credit Sales</option>
-            </select>
-          </div>
-          <div>
-            <label>Payment Option</label>
-            <select
-
-              required
-            >
-              <option value="">Select payment option</option>
-              <option value="full">Full Payment</option>
-              <option value="part_payment">Part Payment</option>
-              <option value="credit">Credit Sales</option>
-            </select>
-          </div>
           <div >
-            <label>Payment Option</label>
-            <select
-              required
-            >
-              <option value="">Select payment option</option>
-              <option value="full">Full Payment</option>
-              <option value="part_payment">Part Payment</option>
-              <option value="credit">Credit Sales</option>
-            </select>
-          </div>
-          <div >
-            <label >Quantity:</label>
+            <label >Service Name</label>
             <input
-              type="number"
+              type=""
               required
+              placeholder='Service Name'
             />
           </div>
           <div >
-            <label >Quantity:</label>
+            <label >Service Manager</label>
+            <select
+              required
+            >
+              <option value="">Select Service Manager</option>
+              <option value="full">Full Payment</option>
+              <option value="part_payment">Part Payment</option>
+              <option value="credit">Credit Sales</option>
+            </select>
+          </div>
+          <div >
+            <label >Price</label>
             <input
               type="number"
               required
+              placeholder='Price'
+            />
+          </div>
+          <div >
+            <label >Phone Number</label>
+            <input
+              type="number"
+              required
+              placeholder='Phone Number'
+            />
+          </div>
+          <div >
+            <label >Average TAT (Duration)</label>
+            <input
+              type="number"
+              required
+              placeholder='Average TAT (Duration)'
             />
           </div>
   </>
@@ -64,7 +59,7 @@ const AddService = () => {
 
 
   return (
-    <div>
+    <div className='h-full'>
         {/* use the addAnother to implement the logic to remain on the page if checked */}
         <AddModal
           header={'Add Sales Record'} 

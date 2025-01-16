@@ -30,7 +30,7 @@ const ModalWrapper = ({
       {/* Modal Content */}
       <div
         className={clsx(
-          'relative z-10 w-full bg-white rounded-lg p-4',
+          'relative z-10 w-full bg-white rounded-lg p-4 max-h-[85%] overflow-y-auto',
           contentMaxWidth,
           {
             'mx-auto': position === 'center',
