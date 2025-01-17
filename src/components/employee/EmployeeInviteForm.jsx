@@ -118,7 +118,7 @@ const EmployeeInviteForm = () => {
             <input
               className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-imsDarkPurple focus:border-imsring-imsDarkPurple sm:text-sm bg-transparent"
               type="email"
-              placeholder="Enter email"
+              placeholder="Enter Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
