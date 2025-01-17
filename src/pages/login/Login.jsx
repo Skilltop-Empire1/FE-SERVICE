@@ -3,11 +3,15 @@ import loginIllustration from '../../assets/loginIllustration.svg'
 
 import style from './Login.module.css'
 import { Link } from 'react-router'
+import { toast, ToastContainer } from 'react-toastify'
+import { useLoginMutation } from '../../redux/api/authApi'
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   })
+
+  const [login, { isLoading, isError }] = useLoginMutation()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -17,13 +21,24 @@ function Login() {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('Form submitted with data:', formData)
+    try {
+      const response = await login(formData).unwrap()
+      console.log('Logged in successfully:', response.data)
+    } catch (error) {
+      toast.error(
+        'Error logging in:',
+        error.data?.message || 'There was an error logging in',
+      )
+      console.error('Error logging in:', error)
+    }
   }
 
   return (
     <div className={style.container}>
+      <ToastContainer />
       <div className={style.illustrationWrapper}>
         <img src={loginIllustration} alt="Brand Logo" />
       </div>

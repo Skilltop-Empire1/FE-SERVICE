@@ -7,7 +7,7 @@ export const authApi = createApi({
     baseUrl: import.meta.env.VITE_API_URL,
     prepareHeaders: (headers, { getState }) => {
       // Fallback to localStorage if token is not in Redux
-      const token = getState().auth.token || localStorage.getItem('token')
+      const token = getState()?.auth?.token || localStorage.getItem('token')
       if (token) {
         headers.set('Authorization', `Bearer ${token}`)
       }
@@ -18,7 +18,7 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     signup: builder.mutation({
       query: (userData) => ({
-        url: '/api/IMS/user/signup',
+        url: '/api/v1/user/signup',
         method: 'POST',
         body: userData,
       }),
@@ -26,7 +26,7 @@ export const authApi = createApi({
 
     login: builder.mutation({
       query: (credentials) => ({
-        url: '/api/IMS/user/login',
+        url: '/api/v1/user/signin',
         method: 'POST',
         body: credentials,
       }),
@@ -54,7 +54,8 @@ export const authApi = createApi({
     }),
 
     fetchUser: builder.query({
-      query: () => 'user',
+      query: () => '/api/v1/user/',
+      providesTags: ['User'],
     }),
 
     logout: builder.mutation({
@@ -67,10 +68,26 @@ export const authApi = createApi({
           await queryFulfilled
           localStorage.removeItem('token')
           dispatch(logoutAction())
+          dispatch(authApi.util.resetApiState())
         } catch (err) {
           console.error('Logout failed:', err)
         }
       },
+    }),
+    resetPassword: builder.mutation({
+      query: (credentials) => ({
+        url: '/api/v1/user/password-reset',
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
+    updatePassword: builder.mutation({
+      query: (credentials) => ({
+        url: '/api/v1/user/change-password',
+        method: 'POST',
+        body: credentials,
+      }),
+      invalidatesTags: ['User'], // Ensures updated user data is fetched
     }),
   }),
 })

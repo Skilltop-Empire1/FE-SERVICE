@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import signUpImage from '../../assets/signupIllustration.svg'
 import style from './SignUp.module.css'
 import { Link } from 'react-router'
+import { useSignupMutation } from '../../redux/api/authApi'
+import { toast, ToastContainer } from 'react-toastify'
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -10,6 +12,7 @@ function SignUp() {
     organization: '',
     termsAccepted: false,
   })
+  const [signup, { isLoading, isError }] = useSignupMutation()
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -19,17 +22,22 @@ function SignUp() {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    const { email, password, organization } = formData
     e.preventDefault()
     if (!formData.termsAccepted) {
-      alert('You must accept the terms and conditions to sign up.')
+      toast.error('You must accept the terms and conditions to sign up.')
       return
     }
+    try {
+      const response = await signup(formData).unwrap()
+    } catch (error) {}
     console.log('Form submitted with data:', formData)
   }
 
   return (
     <div className={style.container}>
+      <ToastContainer position="top-center" />
       <div className={style.illustrationWrapper}>
         <img src={signUpImage} alt="Sign Up Illustration" />
       </div>

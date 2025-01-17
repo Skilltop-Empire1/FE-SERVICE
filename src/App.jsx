@@ -16,6 +16,7 @@ import AddEmployee from './pages/addEmployee/AddEmployee'
 import CreateTask from './pages/createTask/CreateTask'
 import AddService from './pages/addService/AddService'
 import NotFound from './pages/notFound/NotFound'
+import ProtectedRoute from './utils/ProtectedRoute'
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/app',
-    element: <AppLayout />,
+    element: (
+      // <ProtectedRoute>
+      <AppLayout />
+      // </ProtectedRoute>
+    ),
     children: [
       {
         index: true,

@@ -29,6 +29,11 @@
   cursor: pointer;
 }
 
+.navContainer li:hover {
+  /* background-color: #2563eb; */
+  transform: scale(1.1);
+}
+
 .navContainer ul li:last-child {
   display: flex;
   align-items: center;
