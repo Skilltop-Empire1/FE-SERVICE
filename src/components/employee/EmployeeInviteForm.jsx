@@ -5,7 +5,7 @@ import FilledButton from '@src/features/reusables/Buttons/FilledButton'
 
 // Define Zod schema for form validation
 const staffInviteSchema = z.object({
-  username: z.string().min(1, 'Username is required'),
+  username: z.string().min(1, 'Employee Username is required'),
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
   role: z.string().min(1, 'Role is required'),
@@ -94,7 +94,7 @@ const EmployeeInviteForm = () => {
           {/* Username */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Username
+              Employee Username
             </label>
             <input
               className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-imsDarkPurple focus:border-imsring-imsDarkPurple sm:text-sm bg-transparent"
@@ -165,7 +165,7 @@ const EmployeeInviteForm = () => {
         <div className="mt-6 flex justify-center gap-4">
           <FilledButton
             content={loading ? 'Sending Invite...' : 'Send Invite'}
-            disabled={loading}
+            performAction={handleSubmit}
           />
         </div>
       </form>
