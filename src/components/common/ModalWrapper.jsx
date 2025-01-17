@@ -44,7 +44,7 @@ const ModalWrapper = ({
             type="button"
             onClick={onClose}
             className={clsx(
-              'absolute top-2 inline-flex h-8 w-8 items-center justify-center rounded-full text-sm text-gray-400 hover:text-gray-900',
+              'absolute top-2 z-10 inline-flex h-8 w-8 items-center justify-center rounded-full text-sm text-gray-400 hover:text-gray-900',
               {
                 'right-2': closeButtonPosition === 'right',
                 'left-2': closeButtonPosition === 'left',
