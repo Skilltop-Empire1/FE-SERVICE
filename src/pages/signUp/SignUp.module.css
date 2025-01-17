@@ -1,0 +1,244 @@
+/* Base styles (larger screens) */
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+}
+
+.toLoginRoute a {
+  color: #fff;
+}
+
+.container p a:hover {
+  text-decoration: underline;
+}
+
+.toLoginRoute {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24.2px;
+  letter-spacing: 0.03em;
+  text-align: left;
+}
+
+.illustrationWrapper {
+  width: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.illustrationWrapper img {
+  max-width: 80%;
+  max-height: 80%;
+  width: auto;
+  height: auto;
+  margin-left: 10%;
+}
+
+.formWrapper {
+  width: 50vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 80px;
+  background-color: #0b74ee;
+  color: #fff;
+  box-shadow: 0rem 0.1875rem 0.375rem 0rem #120f281f;
+  gap: 26px;
+}
+
+.formWrapper h2 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+}
+
+.formWrapper p {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 22px;
+  text-align: center;
+}
+
+.formWrapper form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputField {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: left;
+  gap: 0.8rem;
+}
+
+.checkboxField {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  border: 2px;
+}
+
+.inputField .input {
+  width: 100%;
+  height: 3.125rem;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #ffffff;
+  background-color: #0b74ee;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.375rem;
+}
+
+.inputField .input::placeholder {
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 200;
+}
+
+.formWrapper label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.375rem;
+  text-align: left;
+}
+
+.formWrapper label:last-child {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: left;
+}
+
+.formWrapper button {
+  height: 2.9rem;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #ffffff;
+  background-color: #ffffff;
+  color: #0b74ee;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.375rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.formWrapper button:hover {
+  background-color: #0b74ee;
+  color: #ffffff;
+  border-color: #fff;
+}
+
+/* Media query for small screens (less than 1024px) */
+@media (max-width: 1024px) {
+  .formWrapper {
+    padding: 110px 32px;
+  }
+
+  .formWrapper h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 3rem;
+    word-wrap: break-word;
+  }
+}
+
+/* Media query for small screens (less than 769px) */
+@media (max-width: 769px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+    padding: 57px;
+  }
+
+  .inputField .input {
+    width: 100%;
+    background-color: #ffffff;
+    color: #333333;
+    border: 0.0625rem solid #333333;
+  }
+
+  .inputField .input::placeholder {
+    color: #333333;
+  }
+
+  .illustrationWrapper {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  .illustrationWrapper img {
+    width: 13.5rem;
+    height: 8.3881rem;
+  }
+
+  .formWrapper {
+    padding: 1rem;
+    background-color: #ffffff;
+    color: #333333;
+    width: 100%;
+  }
+
+  .formWrapper button {
+    background-color: #0b74ee;
+    color: #ffffff;
+  }
+
+  .formWrapper button:hover {
+    background-color: #ffffff;
+    color: #0b74ee;
+    border-color: #0b74ee;
+  }
+
+  .toLoginRoute a {
+    color: #2563eb;
+  }
+}
+
+/* Media query for smaller screens (less than 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 3.5625rem 0.3125rem;
+  }
+
+  .formWrapper h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 2.5rem;
+  }
+
+  .formWrapper {
+    gap: 2rem;
+  }
+
+  .inputField .input {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+
+  .formWrapper button {
+    font-size: 1.2rem;
+    height: 2.75rem;
+  }
+}
