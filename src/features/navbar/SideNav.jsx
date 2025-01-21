@@ -55,11 +55,13 @@ function SideNav() {
     <nav
       ref={ref}
       className={`${styles.sideNav} ${isOpen ? styles.showNav : ''}`}
+      aria-label="Main Side Navigation"
     >
       <div
         onClick={() => dispatch(toggleMenu())}
         role="button"
         className={styles.closeMenu}
+        aria-label="Close Menu"
       >
         <X color="#ffffff" />
       </div>
