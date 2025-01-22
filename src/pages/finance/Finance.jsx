@@ -2,6 +2,7 @@ import { useState } from 'react'
 import SelectOptions from '../../components/selectOptions/selectOptions'
 
 import styles from './Finance.module.css'
+import { Printer } from 'lucide-react'
 
 const months = [
   'January',
@@ -89,6 +90,12 @@ function Finance() {
       </section>
       <section className={styles.revenue}>
         <label htmlFor="">Revenue Breakdown</label>
+      </section>
+      <section className={styles.print}>
+        <button>
+          <Printer size={16} />
+          <span>Print</span>
+        </button>
       </section>
     </>
   )

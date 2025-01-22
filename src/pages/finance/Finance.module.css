@@ -131,6 +131,41 @@
   text-align: left;
 }
 
+.print {
+  margin-top: 24px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.print button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 245px;
+  height: 44px;
+  top: 883px;
+  left: 884px;
+  padding: 10px;
+  gap: 10px;
+  opacity: 0px;
+  background-color: #2563eb;
+  border: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.print button:hover {
+  background-color: #ffffff;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+}
+
 @media (max-width: 787px) {
   .selectsSection {
     flex-direction: column;
@@ -166,5 +201,9 @@
   .buttonGroup button {
     width: 9.5rem;
     height: 70px;
+  }
+
+  .print button {
+    width: 100%;
   }
 }
