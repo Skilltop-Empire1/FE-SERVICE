@@ -1,0 +1,77 @@
+.businessMetric {
+  width: 100%;
+  margin-top: 17px;
+}
+
+.businessMetric header {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 24.2px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  margin-bottom: 17px;
+}
+
+.cardsContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 20px;
+}
+
+.performance {
+  margin-top: 17px;
+  width: 100%;
+  border: 1px solid #33333333;
+  border-radius: 5px;
+}
+
+.performanceHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+}
+
+.performanceHeader h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: left;
+}
+
+.recentTask {
+  margin-top: 17px;
+}
+
+.taskHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 17px;
+}
+
+.taskCards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  row-gap: 16px;
+}
+
+@media (max-width: 810px) {
+}
+
+@media (max-width: 480px) {
+  .cardsContainer {
+    justify-content: center;
+  }
+
+  .taskCards {
+    justify-content: center;
+  }
+}

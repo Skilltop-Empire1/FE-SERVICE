@@ -1,0 +1,10 @@
+.select {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.select:focus-within {
+  outline: none;
+  border: 1px solid #007bff;
+}
