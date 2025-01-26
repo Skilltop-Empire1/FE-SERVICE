@@ -88,27 +88,33 @@
   text-align: left;
 }
 
-.expenditureSummary .buttonGroup {
+.expenditureSummary .linkGroup {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.buttonGroup button {
+.linkGroup a {
   background-color: #ffffff;
   width: 22.5rem;
   height: 94px;
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #4f4f4f;
+  color: #4f4f4f;
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 24.2px;
   letter-spacing: -0.02em;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
-.buttonGroup button:hover {
+.linkGroup a:hover {
   border-color: #2563eb;
   color: #2563eb;
 }

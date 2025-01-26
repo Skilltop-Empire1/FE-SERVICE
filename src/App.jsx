@@ -17,6 +17,8 @@ import CreateTask from './pages/createTask/CreateTask'
 import AddService from './pages/addService/AddService'
 import NotFound from './pages/notFound/NotFound'
 import ProtectedRoute from './utils/ProtectedRoute'
+import Opex from './pages/finance/opex/Opex'
+import Capex from './pages/finance/capex/Capex'
 
 const router = createBrowserRouter([
   {
@@ -68,6 +70,8 @@ const router = createBrowserRouter([
         path: 'finance',
         element: <Finance />,
       },
+      { path: 'finance/opex', element: <Opex /> },
+      { path: 'finance/capex', element: <Capex /> },
       {
         path: 'reports',
         element: <Reports />,

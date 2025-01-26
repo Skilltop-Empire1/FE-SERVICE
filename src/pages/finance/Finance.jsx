@@ -3,6 +3,7 @@ import SelectOptions from '../../components/selectOptions/selectOptions'
 
 import styles from './Finance.module.css'
 import { Printer } from 'lucide-react'
+import { Link } from 'react-router'
 
 const months = [
   'January',
@@ -83,9 +84,9 @@ function Finance() {
       </section>
       <section className={styles.expenditureSummary}>
         <label htmlFor="">Expenditure Summary</label>
-        <div className={styles.buttonGroup}>
-          <button>OPEX</button>
-          <button>CAPEX</button>
+        <div className={styles.linkGroup}>
+          <Link to="/app/finance/opex">OPEX</Link>
+          <Link to="/app/finance/capex">CAPEX</Link>
         </div>
       </section>
       <section className={styles.revenue}>
