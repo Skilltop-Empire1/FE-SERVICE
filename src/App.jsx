@@ -16,6 +16,9 @@ import AddEmployee from './pages/addEmployee/AddEmployee'
 import CreateTask from './pages/createTask/CreateTask'
 import AddService from './pages/addService/AddService'
 import NotFound from './pages/notFound/NotFound'
+import AddClient from './pages/addClient/AddClient'
+import Task from './pages/task/Task'
+import AddInventory from './pages/addInventory/AddInventory'
 
 const router = createBrowserRouter([
   {
@@ -56,8 +59,16 @@ const router = createBrowserRouter([
         element: <Clients />,
       },
       {
+        path: 'addClient',
+        element: <AddClient />,
+      },
+      {
         path: 'inventories',
         element: <Inventory />,
+      },
+      {
+        path: 'addInventory',
+        element: <AddInventory />,
       },
       {
         path: 'finance',
@@ -78,6 +89,10 @@ const router = createBrowserRouter([
       {
         path: 'addEmployee',
         element: <AddEmployee />,
+      },
+      {
+        path: 'task',
+        element: <Task />,
       },
       {
         path: 'createTask',

@@ -1,5 +1,7 @@
 .table {
     width: 100%;
+    /* overflow-x: auto; */
+    border-collapse: collapse;
   }
   
   .tr th {
@@ -119,6 +121,7 @@
   .actionMama {
     position: relative;
     /* margin-top: 16px; */
+    text-align: center;
   }
   
   .table {
@@ -132,5 +135,17 @@
   
   .icon2 {
     font-size: 250px;
+  }
+
+
+  @media (max-width: 1023px) {
+    .table th, td {
+      padding: 8px 12px;
+      text-align: left;
+    }
+  
+    .pagination {
+      display: block;
+    }
   }
   
