@@ -2,17 +2,17 @@ import React from 'react'
 import AddModal from '../../features/reusables/AddModal'
 import { useNavigate } from 'react-router'
 
-const AddService = () => {
+const AddClient = () => {
   const navigate = useNavigate()
 
   const goBack = () => [
-    navigate('/app/Services')
+    navigate('/app/clients')
   ]
 
   const formContent = 
   <>
           <div >
-            <label >Service Name</label>
+            <label >Client Name</label>
             <input
               type=""
               required
@@ -20,18 +20,7 @@ const AddService = () => {
             />
           </div>
           <div >
-            <label >Service Manager</label>
-            <select
-              required
-            >
-              <option value="">Select Service Manager</option>
-              <option value="full">Full Payment</option>
-              <option value="part_payment">Part Payment</option>
-              <option value="credit">Credit Sales</option>
-            </select>
-          </div>
-          <div >
-            <label >Price</label>
+            <label >Residential Address</label>
             <input
               type="number"
               required
@@ -47,9 +36,36 @@ const AddService = () => {
             />
           </div>
           <div >
-            <label >Average TAT (Duration)</label>
+            <label >Category</label>
+            <select
+              required
+            >
+              <option value="">Select Service Manager</option>
+              <option value="full">Full Payment</option>
+              <option value="part_payment">Part Payment</option>
+              <option value="credit">Credit Sales</option>
+            </select>
+          </div>
+          <div >
+            <label >Email Address</label>
             <input
-              type="number"
+              type="text"
+              required
+              placeholder='Average TAT (Duration)'
+            />
+          </div>
+          <div >
+            <label >Description</label>
+            <input
+              type="text"
+              required
+              placeholder='Average TAT (Duration)'
+            />
+          </div>
+          <div >
+            <label >Birthday</label>
+            <input
+              type="date"
               required
               placeholder='Average TAT (Duration)'
             />
@@ -62,14 +78,14 @@ const AddService = () => {
     <div className='h-full'>
         {/* use the addAnother to implement the logic to remain on the page if checked */}
         <AddModal
-          header={'Add Service'} 
+          header={'Add Client'} 
           formContent={formContent} 
           close={goBack} 
-          anotherContent={'Add another service'}
+          anotherContent={'Add another Client'}
           
         />
     </div>
   )
 }
 
-export default AddService
+export default AddClient

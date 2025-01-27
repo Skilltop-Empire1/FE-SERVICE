@@ -95,3 +95,16 @@
   background-color: #2563eb;
   color: #fff;
 }
+
+@media (max-width:1023px) {
+  .container {
+    display: block;
+    gap: 5px;
+  }
+
+  .searchAndButton {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+}

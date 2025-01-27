@@ -1,6 +1,6 @@
 import TopBar from '../../features/topBar/TopBar'
 import SideNav from '../../features/navbar/SideNav'
-import { Outlet } from 'react-router'
+import { Outlet } from 'react-router-dom'
 
 import styles from './AppLayout.module.css'
 

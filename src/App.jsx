@@ -19,6 +19,9 @@ import NotFound from './pages/notFound/NotFound'
 import ProtectedRoute from './utils/ProtectedRoute'
 import Opex from './pages/finance/opex/Opex'
 import Capex from './pages/finance/capex/Capex'
+import AddClient from './pages/addClient/AddClient'
+import Task from './pages/task/Task'
+import AddInventory from './pages/addInventory/AddInventory'
 
 const router = createBrowserRouter([
   {
@@ -63,8 +66,16 @@ const router = createBrowserRouter([
         element: <Clients />,
       },
       {
+        path: 'addClient',
+        element: <AddClient />,
+      },
+      {
         path: 'inventories',
         element: <Inventory />,
+      },
+      {
+        path: 'addInventory',
+        element: <AddInventory />,
       },
       {
         path: 'finance',
@@ -87,6 +98,10 @@ const router = createBrowserRouter([
       {
         path: 'addEmployee',
         element: <AddEmployee />,
+      },
+      {
+        path: 'task',
+        element: <Task />,
       },
       {
         path: 'createTask',

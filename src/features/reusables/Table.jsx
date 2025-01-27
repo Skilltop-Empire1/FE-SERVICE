@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import style from "./tableStyle.module.css";
 import { Trash, Edit2Icon, EyeIcon, Printer } from "lucide-react";
 
-const Table = ({ status, date, api = [], deleted, updated, view, runPrint, printref, selectedRows, toggleRowSelection, selectAllRows, tableHead }) => {
+const Table = ({ status, date, api = [], deleted, updated, view, runPrint, printref, selectedRows, toggleRowSelection, selectAllRows, tableHead, tableContent }) => {
   const [action, setAction] = useState({});
   // const [selectedRows, setSelectedRows] = useState([]);
   const actionRef = useRef(null);
@@ -138,6 +138,7 @@ const Table = ({ status, date, api = [], deleted, updated, view, runPrint, print
 
   return (
     <div className="pt-3">
+      <div className=" overflow-x-auto w-[100%]">
       <table className={style.table}>
         <thead>
           <tr className={style.tr}>
@@ -149,117 +150,30 @@ const Table = ({ status, date, api = [], deleted, updated, view, runPrint, print
           </tr>
         </thead>
         <tbody>
-          {currentData.map((product, idx) => (
-            <tr key={product.saleId}>
-              <td>
-              </td>
-              <td>{product.Product.name}</td>
-              <td>{product.paymentOption == 'full' ? 'Full Payment' : product.paymentOption == 'credit'? 'Credit' : product.paymentOption == 'part_payment'? 'Part Payment' : ''}</td>
-              <td>{product.quantity}</td>
-              <td>₦ {product.totalAmount}</td>
-              <td>{product.Store.storeName}</td>
-              <td>{product.soldDate?.substr(0, 10)}</td>
-              <td>
-                <div onClick={() => openAction(idx)} className={style.actionMama}>
-                  ...
-                </div>
-                {action[idx] && (
-                  <div className={`${style.action}`} ref={actionRef}>
-                    <p
-                      className="flex gap-3 text-sm "
-                      onClick={() => view(product)}
-                    >
-                      <EyeIcon size={20} className={style.icon2} />
-                      View
-                    </p>
-                    <hr />
-                    <p
-                      onClick={() => updated(product)}
-                      className="flex gap-3 text-sm "
-                    >
-                      <Edit2Icon size={20} className={style.icon2} />
-                      Edit
-                    </p>
-                    {/* <hr />
-                    <p className="flex gap-3 text-sm ">
-                      <Printer size={20} className={style.icon2} />
-                      Print
-                    </p> */}
-                    <hr />
-                    <p
-                      onClick={() => deleted(product.saleId)}
-                      className="flex text-sm gap-3"
-                    >
-                      <Trash size={20} className={style.icon2} />
-                      Delete
-                    </p>
-                  </div>
-                )}
-              </td>
-            </tr>
-
-
-
-          ))}
-<tr >
-
-<td>none</td>
-<td>2</td>
-<td>3</td>
-<td>₦ 4</td>
-<td>5</td>
-<td>6</td>
-<td>
-  <div onClick={openAction} className={style.actionMama}>
-    ...
-  </div>
-  {action && (
-    <div className={`${style.action}`} ref={actionRef}>
-      <p
-        className="flex gap-3 text-sm "
-        onClick={() => view(product)}
-      >
-        <EyeIcon size={20} className={style.icon2} />
-        View
-      </p>
-      <hr />
-      <p
-        onClick={() => updated(product)}
-        className="flex gap-3 text-sm "
-      >
-        <Edit2Icon size={20} className={style.icon2} />
-        Edit
-      </p>
-      {/* <hr />
-      <p className="flex gap-3 text-sm ">
-        <Printer size={20} className={style.icon2} />
-        Print
-      </p> */}
-      <hr />
-      <p
-        onClick={() => deleted(product.saleId)}
-        className="flex text-sm gap-3"
-      >
-        <Trash size={20} className={style.icon2} />
-        Delete
-      </p>
-    </div>
-  )}
-</td>
-</tr>
+           {/* content body to be used by passing the api content to */}
+          {tableContent}    
         </tbody>
       </table>
 
-      <div className={`${style.pagination}`}>
+
+
+      {/* Hidden Component for Printing */}
+      {/* <div className="hidden">
+        <SelectedRowsComponent ref={printref} />
+      </div> */}
+
+
+    </div>
+      <div className={`${style.pagination} justify-between`}>
         {/* Pagination buttons */}
         <div>
-        <span>
-          Showing {startIndex + 1} to{" "}
-          {currentPage === totalPages ? api.length : currentPage * itemsPerPage}{" "}
-          of {api.length} entries (Filtered from {api.length} total entries)
-        </span>
+          <span>
+            Showing {startIndex + 1} to{" "}
+            {currentPage === totalPages ? api.length : currentPage * itemsPerPage}{" "}
+            of {api.length} entries (Filtered from {api.length} total entries)
+          </span>
         </div>
-        <div className={`${style.pagination}`}>
+        <div className={`flex`}>
              <button
                 onClick={() => goToPage(1)}
                 className={style.pageButton}
@@ -309,11 +223,6 @@ const Table = ({ status, date, api = [], deleted, updated, view, runPrint, print
               </button>
           </div>
       </div>
-
-      {/* Hidden Component for Printing */}
-      {/* <div className="hidden">
-        <SelectedRowsComponent ref={printref} />
-      </div> */}
     </div>
   );
 };

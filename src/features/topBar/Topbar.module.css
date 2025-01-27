@@ -44,7 +44,7 @@
   color: #fff;
 }
 
-@media (max-width: 810px) {
+@media (max-width: 1023px) {
   .logo {
     display: none;
   }
