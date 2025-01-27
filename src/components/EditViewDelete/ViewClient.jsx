@@ -1,28 +1,32 @@
 import View from '../../features/reusables/EditViewDelete/View'
 import React from 'react'
 
-const ViewService = ({close}) => {
+const ViewClient = ({close}) => {
 
     const formContent = 
     <>
       <div>
-        <h3 >Service Name</h3>
-        <p>Text goes here</p>
-      </div>
-      <div>
-        <h3 >Price</h3>
-        <p>Text goes here</p>
-      </div>
-      <div>
-        <h3 >Average TAT (Duration)</h3>
-        <p>Text goes here</p>
-      </div>
-      <div >
-        <h3 >Service Manager</h3>
+        <h3 >Client Name</h3>
         <p>Text goes here</p>
       </div>
       <div>
         <h3 >Phone Number</h3>
+        <p>Text goes here</p>
+      </div>
+      <div>
+        <h3 >Email Address</h3>
+        <p>Text goes here</p>
+      </div>
+      <div >
+        <h3 >Birth Day</h3>
+        <p>Text goes here</p>
+      </div>
+      <div>
+        <h3 >Address</h3>
+        <p>Text goes here</p>
+      </div>
+      <div>
+        <h3 >Loyalty Status</h3>
         <p>Text goes here</p>
       </div>
       <div>
@@ -33,9 +37,9 @@ const ViewService = ({close}) => {
 
   return (
     <div>
-      <View close={close} formContenten = {formContent} header='Service Detail'/>
+      <View close={close} formContenten = {formContent} header='Client Detail'/>
     </div>
   )
 }
 
-export default ViewService
+export default ViewClient

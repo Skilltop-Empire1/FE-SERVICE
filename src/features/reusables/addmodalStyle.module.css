@@ -17,6 +17,7 @@
   .form {
     display: grid;
     grid-template-columns: 2fr 2fr;
+    gap: 10px;
   }
   
   
@@ -31,21 +32,22 @@
   }
   
 .form div input {
-    width: 450px;
     /* background: #f4f3f3; */
     height: 55px;
     border-radius: 15px;
     border: 1px solid #3D3D3D;
     padding: 5px 10px;
+    width: 100%;
   }
 
   .form div {
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
   
   .form div select {
-    width: 450px;
+    width: 100%;
     /* background: #f4f3f3; */
     height: 55px;
     border-radius: 15px;
@@ -79,4 +81,11 @@
   
   .success {
       width: 100%;
+  }
+
+  @media (max-width:640px) {
+    .form {
+      display: grid;
+      grid-template-columns: 2fr;
+    }
   }

@@ -1,27 +1,25 @@
-import React, {useState, useEffect, useRef} from 'react'
-import SearchAndButtons from '../../features/searchAndButtons/SearchAndButtons'
-import Table from '../../features/reusables/Table'
+import React, { useState, useRef, useEffect } from 'react'
 import { Navigate, useNavigate } from 'react-router'
-// import EditContent from '@src/components/EditViewDelete/EditContent'
-import EditContent from '../../components/EditViewDelete/EditService'
-import ViewContent from '../../components/EditViewDelete/ViewService'
+import Table from '../../features/reusables/Table'
+import SearchAndButtons from '../../features/searchAndButtons/SearchAndButtons'
+import EditContent from '../../components/EditViewDelete/EditTask'
+import ViewContent from '../../components/EditViewDelete/ViewTask'
 import Delete from '@src/features/reusables/EditViewDelete/Delete'
 import { useFetchResourceQuery } from '@src/redux/api/generalApi'
 import { Trash, Edit2Icon, EyeIcon, Printer } from "lucide-react";
 
-const Services = () => {
+const Task = () => {
 
   const {
     data: fetchedData,
     error: accountError,
     isLoading: accountLoading,
-  } = useFetchResourceQuery("/service/allServices");
-
+  } = useFetchResourceQuery("/task/list");
 
   const navigate = useNavigate()
 
   const goTo = () => {
-    navigate('/app/addServices')
+    navigate('/app/createTask')
   }
 
   const [isModalVisible, setModalVisible] = useState(false)
@@ -29,6 +27,7 @@ const Services = () => {
   const [isDeleteVisible, setDeleteVisible] = useState(false)
   const [updateData, setUpdateData] = useState()
   const [viewData, setViewData] = useState()
+  
 
   const toggleEdit = (record) => {
     setModalVisible(!isModalVisible)
@@ -42,21 +41,44 @@ const Services = () => {
 
 
 
-    //pagination
-    const [action, setAction] = useState({});
-    // const [selectedRows, setSelectedRows] = useState([]);
-    const actionRef = useRef(null);
-  
-    // const itemsPerPage = 10;
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const totalPages = Math.ceil(fetchedData.length / itemsPerPage);
-  
-    // const startIndex = (currentPage - 1) * itemsPerPage;
-    // const endIndex = Math.min(startIndex + itemsPerPage, fetchedData.length);
-    // const currentData = api.slice(startIndex, endIndex);
-  
 
-  
+
+
+
+
+
+  //pagination
+  const [action, setAction] = useState({});
+  // const [selectedRows, setSelectedRows] = useState([]);
+  const actionRef = useRef(null);
+
+  // const itemsPerPage = 10;
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const totalPages = Math.ceil(fetchedData.length / itemsPerPage);
+
+  // const startIndex = (currentPage - 1) * itemsPerPage;
+  // const endIndex = Math.min(startIndex + itemsPerPage, fetchedData.length);
+  // const currentData = api.slice(startIndex, endIndex);
+
+
+
+
+
+
+
+
+
+  //navigation
+  const goToPage = (page) => {
+    setCurrentPage(page);
+  };
+
+
+
+
+
+
+
   //action buttons toggle
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -84,7 +106,7 @@ const Services = () => {
 
 
   //table content and table
-  const tableHead = ['Service Name','Price', 'Average TAT (Duration)', 'Service Manager', 'Phone Number', 'Date Added', 'Action']
+  const tableHead = ['Task Name','Assign To', 'Task Status', 'Priority', 'Due Date', 'Action']
   const tableContent =  
       <>
         {fetchedData?.map((product, idx) => (
@@ -137,30 +159,29 @@ const Services = () => {
         ))}
     </>
 
- 
 
   return (
     <div>
-        <SearchAndButtons pageName={'Service'} buttonName={'+ Add Service'} handleClick={goTo}/>
-        <Table  tableHead={tableHead} updated={toggleEdit} view={toggleView} deleted={toggleDelete} tableContent={tableContent}/>
-        {isModalVisible && 
+      <SearchAndButtons pageName={'Tasks'} buttonName={'+ Add Task  '} handleClick={goTo}/>
+      <Table  tableHead={tableHead}  tableContent={tableContent}/>
+      {isModalVisible && 
         (
           <EditContent close={toggleEdit}/>
         )
         }
         {isViewVisible && 
         (
-          <ViewContent close={toggleView}/>
+          <ViewContent close={toggleView} data={viewData}/>
         )
         }
         {isDeleteVisible && 
         (
-          <Delete close={toggleDelete} page='service'/>
+          <Delete close={toggleDelete} page='task'/>
         )
-        }
-
+      }
     </div>
   )
 }
 
-export default Services
+export default Task
+
