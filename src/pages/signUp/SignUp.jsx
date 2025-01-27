@@ -9,10 +9,18 @@ function SignUp() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    organization: '',
-    signupCode: '',
+    username: '',
+    subscriptionCode: '',
     termsAccepted: false,
   })
+
+  const dataToSubmit = {
+    email: formData.email.trim(),
+    password: formData.password.trim(),
+    username: formData.username.trim(),
+    subscriptionCode: formData.subscriptionCode.trim(),
+  }
+
   const [signup, { isLoading, isError }] = useSignupMutation()
 
   const handleChange = (e) => {
@@ -30,7 +38,7 @@ function SignUp() {
       return
     }
     try {
-      const response = await signup(formData).unwrap()
+      const response = await signup(dataToSubmit).unwrap()
     } catch (error) {}
     console.log('Form submitted with data:', formData)
   }
@@ -73,27 +81,27 @@ function SignUp() {
             />
           </div>
           <div className={style.inputField}>
-            <label htmlFor="organization">Organization Name:</label>
+            <label htmlFor="username">Organization Name:</label>
             <input
               className={style.input}
               type="text"
-              id="organization"
-              name="organization"
+              id="username"
+              name="username"
               placeholder="Enter your organization"
-              value={formData.organization}
+              value={formData.username}
               onChange={handleChange}
               required
             />
           </div>
           <div className={style.inputField}>
-            <label htmlFor="signupCode">Signup Code:</label>
+            <label htmlFor="subscriptionCode">Signup Code:</label>
             <input
               className={style.input}
               type="text"
-              id="signupCode"
-              name="signupCode"
+              id="subscriptionCode"
+              name="subscriptionCode"
               placeholder="Enter your signup code"
-              value={formData.signupCode}
+              value={formData.subscriptionCode}
               onChange={handleChange}
               required
             />
