@@ -1,0 +1,36 @@
+.selectOption {
+  width: 183px;
+  height: 44px;
+  padding: 10px;
+  gap: 16px;
+  border-radius: 4px;
+  border: 1px solid #333333;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5125rem;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+.selectOption option {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5125rem;
+  letter-spacing: -0.02em;
+}
+
+.selectOption:focus-visible {
+  border: 1px solid #2563eb;
+  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+@media (max-width: 460px) {
+  .selectOption {
+    max-width: 135px;
+  }
+  .selectOption option {
+    font-size: 0.5rem;
+    font-weight: 500;
+  }
+}

@@ -10,9 +10,9 @@ function AppLayout() {
       <TopBar />
       <div className={styles.main}>
         <SideNav />
-        <div className={styles.outlet}>
+        <main className={styles.outlet}>
           <Outlet />
-        </div>
+        </main>
       </div>
     </div>
   )

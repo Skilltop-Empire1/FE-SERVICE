@@ -29,6 +29,10 @@
   cursor: pointer;
 }
 
+.navContainer li:hover {
+  transform: scale(1.1);
+}
+
 .navContainer ul li:last-child {
   display: flex;
   align-items: center;
