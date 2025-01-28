@@ -5,8 +5,8 @@ import { Navigate, useNavigate } from 'react-router'
 // import EditContent from '@src/components/EditViewDelete/EditContent'
 import EditContent from '../../components/EditViewDelete/EditService'
 import ViewContent from '../../components/EditViewDelete/ViewService'
-import Delete from '@src/features/reusables/EditViewDelete/Delete'
-import { useFetchResourceQuery } from '@src/redux/api/generalApi'
+import Delete from '../../features/reusables/EditViewDelete/Delete'
+import { useFetchResourceQuery } from '../../redux/api/generalApi'
 import { Trash, Edit2Icon, EyeIcon, Printer } from "lucide-react";
 
 const Services = () => {

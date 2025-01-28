@@ -1,7 +1,7 @@
 import React from 'react'
 import AddModal from '../../features/reusables/AddModal'
 import { useNavigate } from 'react-router'
-import { usePostResourceMutation } from '@src/redux/api/generalApi'
+import { usePostResourceMutation } from '../../redux/api/generalApi'
 
 const CreateTask = () => {
   const navigate = useNavigate()

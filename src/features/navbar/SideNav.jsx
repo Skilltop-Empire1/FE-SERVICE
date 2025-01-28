@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router'
 import {
   Users,
   Settings,
@@ -19,6 +19,7 @@ import styles from './SideNav.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleMenu } from '../../redux/slices/toggleMenuSlice'
 import { useEffect, useRef } from 'react'
+
 
 function SideNav() {
   const ref = useRef()

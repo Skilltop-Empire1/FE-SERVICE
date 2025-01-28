@@ -1,5 +1,5 @@
 import React from 'react'
-import ModalWrapper from '@src/components/common/ModalWrapper'
+import ModalWrapper from '../../../components/common/ModalWrapper'
 
 const Delete = ({close, page}) => {
   return (

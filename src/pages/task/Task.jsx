@@ -4,9 +4,10 @@ import Table from '../../features/reusables/Table'
 import SearchAndButtons from '../../features/searchAndButtons/SearchAndButtons'
 import EditContent from '../../components/EditViewDelete/EditTask'
 import ViewContent from '../../components/EditViewDelete/ViewTask'
-import Delete from '@src/features/reusables/EditViewDelete/Delete'
-import { useFetchResourceQuery } from '@src/redux/api/generalApi'
+import Delete from '../../features/reusables/EditViewDelete/Delete'
+import { useFetchResourceQuery } from '../../redux/api/generalApi'
 import { Trash, Edit2Icon, EyeIcon, Printer } from "lucide-react";
+
 
 const Task = () => {
 
