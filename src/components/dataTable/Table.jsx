@@ -85,23 +85,13 @@ const Table = ({
             const itemId = getId(item)
             return (
               <tr key={itemId}>
-                {renderRow ? (
-                  renderRow(item, {
-                    onView,
-                    onEdit,
-                    onDelete,
-                    activeActionCell,
-                    setActiveActionCell,
-                  })
-                ) : (
-                  <>
-                    <td>{item.category}</td>
-                    <td>{item.description}</td>
-                    <td>{`$${item.amount.toLocaleString()}`}</td>
-                    <td>{`${item.percentOfTotalExpense}%`}</td>
-                    <td>{`${item.momChange}%`}</td>
-                  </>
-                )}
+                <>
+                  <td>{item.category}</td>
+                  <td>{item.description}</td>
+                  <td>{`$${item.amount.toLocaleString()}`}</td>
+                  <td>{`${item.percentOfTotalExpense}%`}</td>
+                  <td>{`${item.momChange}%`}</td>
+                </>
                 <td>
                   <div
                     className={style.ActionCell}

@@ -31,13 +31,13 @@ export const authApi = createApi({
         body: credentials,
       }),
       transformResponse: (response) => {
-        if (response && response.token) {
+        if (response && response.accessToken) {
           return {
-            token: response.token,
+            token: response.accessToken,
             id: response.id,
             role: response.role,
             email: response.email,
-            username: response.username,
+            // username: response.username,
           }
         }
         throw new Error('Token missing in response')
