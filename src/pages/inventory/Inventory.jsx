@@ -164,23 +164,20 @@ const Inventory = () => {
 
   return (
     <div>
-      <SearchAndButtons pageName={'Inventory'} buttonName={'+ Add Inventory'} handleClick={goTo}/>
-      <Table  tableHead={tableHead} updated={toggleEdit} view={toggleView} deleted={toggleDelete}/>
-        {isModalVisible && 
-        (
-          <EditContent close={toggleEdit}/>
-        )
-        }
-        {isViewVisible && 
-        (
-          <ViewContent close={toggleView}/>
-        )
-        }
-        {isDeleteVisible && 
-        (
-          <Delete close={toggleDelete} page='Inventory'/>
-        )
-        }
+      <SearchAndButtons
+        pageName={'Inventory'}
+        buttonName={'+ Add Inventory'}
+        handleClick={goTo}
+      />
+      <Table
+        tableHead={tableHead}
+        updated={toggleEdit}
+        view={toggleView}
+        deleted={toggleDelete}
+      />
+      {isModalVisible && <EditContent close={toggleEdit} />}
+      {isViewVisible && <ViewContent close={toggleView} />}
+      {isDeleteVisible && <Delete close={toggleDelete} page="Inventory" />}
     </div>
   )
 }

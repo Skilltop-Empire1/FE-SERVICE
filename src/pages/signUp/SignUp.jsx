@@ -2,14 +2,26 @@ import React, { useState } from 'react'
 import signUpImage from '../../assets/signupIllustration.svg'
 import style from './SignUp.module.css'
 import { Link } from 'react-router'
+import { useSignupMutation } from '../../redux/api/authApi'
+import { toast, ToastContainer } from 'react-toastify'
 
 function SignUp() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    organization: '',
+    username: '',
+    subscriptionCode: '',
     termsAccepted: false,
   })
+
+  const dataToSubmit = {
+    email: formData.email.trim(),
+    password: formData.password.trim(),
+    username: formData.username.trim(),
+    subscriptionCode: formData.subscriptionCode.trim(),
+  }
+
+  const [signup, { isLoading, isError }] = useSignupMutation()
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -19,17 +31,21 @@ function SignUp() {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!formData.termsAccepted) {
-      alert('You must accept the terms and conditions to sign up.')
+      toast.error('You must accept the terms and conditions to sign up.')
       return
     }
+    try {
+      const response = await signup(dataToSubmit).unwrap()
+    } catch (error) {}
     console.log('Form submitted with data:', formData)
   }
 
   return (
     <div className={style.container}>
+      <ToastContainer position="top-center" />
       <div className={style.illustrationWrapper}>
         <img src={signUpImage} alt="Sign Up Illustration" />
       </div>
@@ -65,14 +81,27 @@ function SignUp() {
             />
           </div>
           <div className={style.inputField}>
-            <label htmlFor="organization">Organization Name:</label>
+            <label htmlFor="username">Organization Name:</label>
             <input
               className={style.input}
               type="text"
-              id="organization"
-              name="organization"
+              id="username"
+              name="username"
               placeholder="Enter your organization"
-              value={formData.organization}
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className={style.inputField}>
+            <label htmlFor="subscriptionCode">Signup Code:</label>
+            <input
+              className={style.input}
+              type="text"
+              id="subscriptionCode"
+              name="subscriptionCode"
+              placeholder="Enter your signup code"
+              value={formData.subscriptionCode}
               onChange={handleChange}
               required
             />

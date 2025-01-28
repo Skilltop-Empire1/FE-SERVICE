@@ -1,0 +1,89 @@
+.metricCard {
+  width: 240px;
+  height: 140px;
+  padding: 20px;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px;
+  opacity: 0px;
+  background-color: #f7f7f7;
+  border: 1px solid #33333333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.metricHeader {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.moreOptionsBtn {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.moreOptionsBtn:hover {
+  color: #2563eb;
+  border: 1px solid #2563eb;
+  border-radius: 50%;
+}
+
+.metricTitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
+}
+
+.metricData {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.metricQuantity {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: left;
+}
+
+.metricQuantity span {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
+}
+
+.positive {
+  color: #32de07ed;
+}
+
+.negative {
+  color: #fc5107ed;
+}
+
+.metricCommentary {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .metricCard {
+    width: 47%;
+  }
+}
+
+@media (max-width: 480px) {
+  .metricCard {
+    width: 100%;
+  }
+}
