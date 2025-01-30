@@ -1,23 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import style from './Table.module.css'
 import { Edit, Eye, MoreHorizontal, Trash } from 'lucide-react'
 
-const ActionCell = ({ item, onView, onEdit, onDelete }) => (
-  <ul className={style.buttonRow}>
-    <li onClick={() => onView(item)}>
-      <Eye className="w-4 h-4 mr-2" />
-      <span>View</span>
-    </li>
-    <li onClick={() => onEdit(item)}>
-      <Edit className="w-4 h-4 mr-2" />
-      <span>Edit</span>
-    </li>
-    <li onClick={() => onDelete(item)}>
-      <Trash className="w-4 h-4 mr-2" />
-      <span>Delete</span>
-    </li>
-  </ul>
-)
+const ActionCell = ({ item, onView, onEdit, onDelete }) => {
+  console.log('i am clicked on a cell', item.id)
+
+  return (
+    <ul className={style.buttonRow}>
+      <li onClick={() => onView(item)}>
+        <Eye className="w-4 h-4 mr-2" />
+        <span>View</span>
+      </li>
+      <li onClick={() => onEdit(item)}>
+        <Edit className="w-4 h-4 mr-2" />
+        <span>Edit</span>
+      </li>
+      <li onClick={() => onDelete(item)}>
+        <Trash className="w-4 h-4 mr-2" />
+        <span>Delete</span>
+      </li>
+    </ul>
+  )
+}
 
 const Table = ({
   headers,
@@ -34,6 +38,7 @@ const Table = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [activeActionCell, setActiveActionCell] = useState(null)
+  const actionCellRef = useRef(null)
 
   const totalPages = Math.ceil(data?.length / itemsPerPage)
   const indexOfLastItem = currentPage * itemsPerPage
@@ -43,15 +48,16 @@ const Table = ({
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        !event.target.closest(`.${style.buttonRow}`) &&
-        activeActionCell !== null
+        actionCellRef.current &&
+        !actionCellRef.current.contains(event.target)
       ) {
         setActiveActionCell(null)
       }
     }
+
     document.addEventListener('click', handleClickOutside)
     return () => document.removeEventListener('click', handleClickOutside)
-  }, [activeActionCell])
+  }, [])
 
   const handlePageChange = (pageNumber) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
@@ -72,7 +78,7 @@ const Table = ({
           </button>
         </div>
       )}
-      <table className={style.table}>
+      <table ref={actionCellRef} className={style.table}>
         <thead>
           <tr>
             {headers.map((header, index) => (
@@ -85,21 +91,25 @@ const Table = ({
             const itemId = getId(item)
             return (
               <tr key={itemId}>
-                <>
-                  <td>{item.category}</td>
-                  <td>{item.description}</td>
-                  <td>{`$${item.amount.toLocaleString()}`}</td>
-                  <td>{`${item.percentOfTotalExpense}%`}</td>
-                  <td>{`${item.momChange}%`}</td>
-                </>
+                {renderRow ? (
+                  renderRow(item)
+                ) : (
+                  <>
+                    <td>{item.category}</td>
+                    <td>{item.description}</td>
+                    <td>{`$${item.amount.toLocaleString()}`}</td>
+                    <td>{`${item.percentOfTotalExpense}%`}</td>
+                    <td>{`${item.momChange}%`}</td>
+                  </>
+                )}
                 <td>
                   <div
                     className={style.ActionCell}
-                    onClick={() =>
+                    onClick={() => {
                       setActiveActionCell(
                         activeActionCell === itemId ? null : itemId,
                       )
-                    }
+                    }}
                     aria-label="More actions"
                     role="button"
                     tabIndex="0"

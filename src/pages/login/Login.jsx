@@ -56,6 +56,7 @@ function Login() {
               value={formData.email}
               onChange={handleChange}
               required
+              disabled={isLoading}
             />
           </div>
           <div className={style.inputField}>
@@ -68,6 +69,7 @@ function Login() {
               value={formData.password}
               onChange={handleChange}
               required
+              disabled={isLoading}
             />
             <div className={style.forgotPassword}>
               <Link to="/">Forgot password?</Link>
