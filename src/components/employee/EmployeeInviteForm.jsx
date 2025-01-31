@@ -88,7 +88,7 @@ const EmployeeInviteForm = () => {
   }
 
   return (
-    <div className="bg-white shadow-lg rounded-lg md:p-6">
+    <div className="bg-white">
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Username */}
