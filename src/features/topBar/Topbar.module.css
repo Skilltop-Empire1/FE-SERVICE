@@ -29,6 +29,10 @@
   cursor: pointer;
 }
 
+.navContainer li:hover {
+  transform: scale(1.1);
+}
+
 .navContainer ul li:last-child {
   display: flex;
   align-items: center;
@@ -40,7 +44,7 @@
   color: #fff;
 }
 
-@media (max-width: 810px) {
+@media (max-width: 1023px) {
   .logo {
     display: none;
   }

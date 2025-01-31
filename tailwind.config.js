@@ -5,8 +5,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        imsLightPurple: '#B990E9',
-        imsPurple: '#7D2CE0',
+        serviceBlue: '#2563EB',
+        serviceRed: '#F44336',
         imsDarkPurple: '#4A02A3',
       },
     },

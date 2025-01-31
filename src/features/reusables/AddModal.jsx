@@ -20,7 +20,7 @@ const AddModal = ({header, formContent, close, submit, addAnother, anotherConten
         </div>
         
         {/* button and checkbox to add another */}
-        <div className='grid-cols-2 grid'>
+        <div className='grid-cols-2 md:grid md:fixed bottom-5'>
             <div className="mt-8 flex items-center gap-4">
                   <input
                     type="checkbox"
@@ -32,7 +32,7 @@ const AddModal = ({header, formContent, close, submit, addAnother, anotherConten
                   <label htmlFor="check">{anotherContent}</label>
                 </div>
 
-                <div className="mt-5 flex gap-3">
+                <div className="mt-5 flex justify-around gap-2 px-2">
                   <OutlinedButton content={'Cancel'} performAction={close}/>
                   <FilledButton content={'Save'} performAction={submit}/>
                 </div>

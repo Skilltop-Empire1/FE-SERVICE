@@ -13,6 +13,7 @@ import {
   MessageCircleMore,
   Plus,
   X,
+  ClipboardList
 } from 'lucide-react'
 import styles from './SideNav.module.css'
 import { useDispatch, useSelector } from 'react-redux'
@@ -55,11 +56,13 @@ function SideNav() {
     <nav
       ref={ref}
       className={`${styles.sideNav} ${isOpen ? styles.showNav : ''}`}
+      aria-label="Main Side Navigation"
     >
       <div
         onClick={() => dispatch(toggleMenu())}
         role="button"
         className={styles.closeMenu}
+        aria-label="Close Menu"
       >
         <X color="#ffffff" />
       </div>
@@ -71,6 +74,7 @@ function SideNav() {
               className={({ isActive }) =>
                 isActive ? `${styles.link} ${styles.active}` : styles.link
               }
+              onClick={() => dispatch(toggleMenu())}
             >
               <LayoutGrid className={styles.icon} />
               <span>Dashboard</span>
@@ -82,6 +86,7 @@ function SideNav() {
               className={({ isActive }) =>
                 isActive ? `${styles.link} ${styles.active}` : styles.link
               }
+              onClick={() => dispatch(toggleMenu())}
             >
               <Users className={styles.icon} />
               <span>Employees</span>
@@ -93,6 +98,7 @@ function SideNav() {
               className={({ isActive }) =>
                 isActive ? `${styles.link} ${styles.active}` : styles.link
               }
+              onClick={() => dispatch(toggleMenu())}
             >
               <HeartHandshake className={styles.icon} />
               <span>Services</span>
@@ -100,13 +106,14 @@ function SideNav() {
           </li>
           <li>
             <NavLink
-              to="/app/clients"
+              to="/app/task"
               className={({ isActive }) =>
                 isActive ? `${styles.link} ${styles.active}` : styles.link
               }
+              onClick={() => dispatch(toggleMenu())}
             >
-              <Handshake className={styles.icon} />
-              <span>Clients</span>
+              <ClipboardList className={styles.icon} />
+              <span>Tasks</span>
             </NavLink>
           </li>
           <li>
@@ -115,9 +122,22 @@ function SideNav() {
               className={({ isActive }) =>
                 isActive ? `${styles.link} ${styles.active}` : styles.link
               }
+              onClick={() => dispatch(toggleMenu())}
             >
               <ListCheck className={styles.icon} />
               <span>Inventories</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/app/clients"
+              className={({ isActive }) =>
+                isActive ? `${styles.link} ${styles.active}` : styles.link
+              }
+              onClick={() => dispatch(toggleMenu())}
+            >
+              <Handshake className={styles.icon} />
+              <span>Clients</span>
             </NavLink>
           </li>
           <li>
@@ -126,6 +146,7 @@ function SideNav() {
               className={({ isActive }) =>
                 isActive ? `${styles.link} ${styles.active}` : styles.link
               }
+              onClick={() => dispatch(toggleMenu())}
             >
               <Banknote className={styles.icon} />
               <span>Finance</span>
@@ -137,6 +158,7 @@ function SideNav() {
               className={({ isActive }) =>
                 isActive ? `${styles.link} ${styles.active}` : styles.link
               }
+              onClick={() => dispatch(toggleMenu())}
             >
               <NotepadText className={styles.icon} />
               <span>Reports</span>
@@ -148,6 +170,7 @@ function SideNav() {
               className={({ isActive }) =>
                 isActive ? `${styles.link} ${styles.active}` : styles.link
               }
+              onClick={() => dispatch(toggleMenu())}
             >
               <MessageCircleMore className={styles.icon} />
               <span>Communication</span>
@@ -159,6 +182,7 @@ function SideNav() {
               className={({ isActive }) =>
                 isActive ? `${styles.link} ${styles.active}` : styles.link
               }
+              onClick={() => dispatch(toggleMenu())}
             >
               <Settings className={styles.icon} />
               <span>Settings</span>
@@ -172,6 +196,7 @@ function SideNav() {
               className={({ isActive }) =>
                 isActive ? `${styles.link} ${styles.active}` : styles.link
               }
+              onClick={() => dispatch(toggleMenu())}
             >
               <UserPlus className={styles.icon} />
               <span>Add Employee</span>
@@ -183,17 +208,20 @@ function SideNav() {
               className={({ isActive }) =>
                 isActive ? `${styles.link} ${styles.active}` : styles.link
               }
+              onClick={() => dispatch(toggleMenu())}
             >
               <Plus className={styles.icon} />
               <span>Create Task</span>
             </NavLink>
           </li>
+          <li>
+            <div role="button" className={styles.logout}>
+              <LogOut className={styles.logoutIcon} />
+              <span>Logout</span>
+            </div>
+          </li>
         </div>
       </ul>
-      <div role="button" className={styles.logout}>
-        <LogOut className={styles.logoutIcon} />
-        <span>Logout</span>
-      </div>
     </nav>
   )
 }

@@ -11,7 +11,7 @@
   margin-left: 240px;
 }
 
-@media (max-width: 810px) {
+@media (max-width: 1023px) {
   .outlet {
     margin-left: 0;
   }
