@@ -11,11 +11,11 @@ const ViewTask = ({close, data}) => {
       </div>
       <div>
         <h3 >Service</h3>
-        <p>Text goes here</p>
+        <p>{data?.Service?.serviceName}</p>
       </div>
       <div>
         <h3 >Assigned To</h3>
-        <p>Text goes here</p>
+        <p>{data?.User?.firstName} {data?.User?.lastName}</p>
       </div>
       <div >
         <h3 >Priority</h3>

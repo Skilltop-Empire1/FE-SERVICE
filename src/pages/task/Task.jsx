@@ -93,7 +93,7 @@ const Task = () => {
           {/* Ensure the key is unique */}
           <td>{product.taskTitle}</td>
           <td>hello</td>
-          <td>{product.taskStatus}</td>
+          <td className={`${product.taskStatus == "To do "? 'text-[#0B74EE33]' : 'text-green-200' } bg-slate-500 text-center`}>{product.taskStatus}</td>
           <td>{product.priority}</td>
           <td>{product.dueDate}</td>
           <td>
@@ -105,7 +105,7 @@ const Task = () => {
             </div>
             {action[idx] && (
               <div
-                className={`absolute bg-[#fff] p-[10px] h-[150px] w-[100px] text-center flex flex-col justify-around shadow-lg shadow-[rgba(168,162,162,0.75)]`}
+                className={`absolute bg-[#fff] z-10 p-[10px] h-[150px] w-[100px] text-center flex flex-col justify-around shadow-lg shadow-[rgba(168,162,162,0.75)]`}
                 ref={actionRef}
               >
                 <p
