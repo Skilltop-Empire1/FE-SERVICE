@@ -64,7 +64,7 @@
 }
 
 .ActionCell:hover {
-  color: #8315db;
+  color: var(--primary-color);
 }
 
 .buttonRow {
@@ -94,7 +94,7 @@
 }
 
 .buttonRow li:hover {
-  background: #8315db;
+  background: var(--primary-color);
   color: #fff;
 }
 
@@ -143,7 +143,7 @@
 }
 
 .pagination button:hover {
-  background: #8315db;
+  background: var(--primary-color);
   color: #fff;
 }
 

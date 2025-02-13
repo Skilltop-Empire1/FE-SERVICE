@@ -1,6 +1,8 @@
 import { Search } from 'lucide-react'
 import { useState } from 'react'
 import styles from './SearchAndButtons.module.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateQuery } from '@src/redux/slices/searchSlice'
 
 function SearchAndButtons({
   pageName,
@@ -9,7 +11,9 @@ function SearchAndButtons({
   buttonArray,
   SingleButtonIcon,
 }) {
-  const [searchTerm, setSearchTerm] = useState('')
+  const { query } = useSelector((state) => state.search)
+
+  const dispatch = useDispatch()
 
   return (
     <div className={styles.container}>
@@ -22,8 +26,8 @@ function SearchAndButtons({
           <input
             type="text"
             placeholder="Search by name"
-            onChange={(e) => setSearchTerm(e.target.value)}
-            value={searchTerm}
+            onChange={(e) => dispatch(updateQuery(e.target.value))}
+            value={query}
             aria-label="Search by name"
             className={styles.searchInput}
           />
