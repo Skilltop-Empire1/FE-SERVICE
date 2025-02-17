@@ -12,6 +12,9 @@
 :root {
   line-height: 1.5;
   font-weight: 400;
+  --primary-color: #2563eb;
+  --background: #ffffff;
+  --secondary-color: #f7f7f7;
 }
 
 * {
