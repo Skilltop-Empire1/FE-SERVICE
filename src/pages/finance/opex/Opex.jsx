@@ -3,8 +3,10 @@ import SearchAndButtons from '../../../features/searchAndButtons/SearchAndButton
 import { Plus } from 'lucide-react'
 import Table from '../../../components/dataTable/Table'
 import { headers, opexData } from '../../../components/dataTable/data'
+import { useNavigate } from 'react-router'
 
 function Opex() {
+  const navigate = useNavigate()
   const handleView = (item) => {
     console.log('View:', item)
   }
@@ -21,6 +23,7 @@ function Opex() {
     <>
       <header>
         <SearchAndButtons
+          handleClick={() => navigate('/app/finance/opex/add-opex')}
           SingleButtonIcon={Plus}
           buttonName="Expense"
           pageName="OPEX Record"

@@ -12,4 +12,8 @@ export default defineConfig({
       '@components': '/src/components', // alias for the components folder
     },
   },
+  server: {
+    port: 5173, // port for the development server
+    open: true, // open the browser on start
+  },
 })

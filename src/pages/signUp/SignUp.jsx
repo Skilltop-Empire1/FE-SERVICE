@@ -14,6 +14,20 @@ function SignUp() {
     termsAccepted: false,
   })
 
+  const [passwordStrength, setPasswordStrength] = useState(0)
+
+  const passwordRegex =
+    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+  const evaluatePasswordStrength = (password) => {
+    let strength = 0
+    if (password.length >= 8) strength += 25
+    if (/[A-Z]/.test(password)) strength += 25
+    if (/\d/.test(password)) strength += 25
+    if (/[@$!%*?&]/.test(password)) strength += 25
+    setPasswordStrength(strength)
+    console.log(passwordStrength)
+  }
+
   const dataToSubmit = {
     email: formData.email.trim(),
     password: formData.password.trim(),
@@ -29,12 +43,21 @@ function SignUp() {
       ...prevData,
       [name]: type === 'checkbox' ? checked : value,
     }))
+    if (name === 'password') {
+      evaluatePasswordStrength(value)
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!formData.termsAccepted) {
       toast.error('You must accept the terms and conditions to sign up.')
+      return
+    }
+    if (!passwordRegex.test(formData.password)) {
+      toast.error(
+        'Password must be at least 8 characters, include one uppercase letter, one number, and one special character.',
+      )
       return
     }
     try {
@@ -79,6 +102,21 @@ function SignUp() {
               onChange={handleChange}
               required
             />
+            <div className={style.passwordMeter}>
+              <p>Password Strength</p>
+              <div
+                className={style.meterBar}
+                style={{
+                  width: `${passwordStrength / 1.5625}px`,
+                  backgroundColor:
+                    passwordStrength === 100
+                      ? 'green'
+                      : passwordStrength >= 50
+                        ? 'orange'
+                        : 'red',
+                }}
+              ></div>
+            </div>
           </div>
           <div className={style.inputField}>
             <label htmlFor="username">Organization Name:</label>

@@ -2,20 +2,27 @@ import React, { useMemo } from 'react'
 import SearchAndButtons from '../../../features/searchAndButtons/SearchAndButtons'
 import { Plus } from 'lucide-react'
 import Table from '../../../components/dataTable/Table'
-import { capexData, capexHeaders } from '../../../components/dataTable/data'
+import { capexHeaders } from '../../../components/dataTable/data'
 import { useGetCapexQuery } from '@src/redux/api/accountApi'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
+import { openModal } from '@src/redux/slices/modalSlice'
+import ModalManager from '@src/modals/expenseModal/modalManager'
 
 function Capex() {
-  const { data: capex, isLoading, isError } = useGetCapexQuery()
+  const { data: capexData, isLoading, isError } = useGetCapexQuery()
   const { query } = useSelector((state) => state.search)
 
-  console.log('capex initialized', capex)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const handleView = (item) => {
-    console.log('View:', item)
+    dispatch(openModal({ modalType: 'VIEW_CAPEX', modalProps: { item } }))
+    console.log('view capex data clicked', item)
   }
 
   const handleEdit = (item) => {
+    dispatch(openModal({ modalType: 'EDIT_CAPEX', modalProps: { item } }))
     console.log('Edit:', item)
   }
 
@@ -40,8 +47,10 @@ function Capex() {
 
     return capexData.filter(
       (item) =>
-        item.capexCategory.toLowerCase().includes(query.toLowerCase()) ||
-        item.assetDescription.toLocaleLowerCase().includes(query.toLowerCase()),
+        item?.capexCategory?.toLowerCase().includes(query.toLowerCase()) ||
+        item?.assetDescription
+          ?.toLocaleLowerCase()
+          .includes(query.toLowerCase()),
     )
   }, [query, capexData])
 
@@ -51,6 +60,7 @@ function Capex() {
     <>
       <header>
         <SearchAndButtons
+          handleClick={() => navigate('/app/finance/capex/add-capex')}
           SingleButtonIcon={Plus}
           buttonName="Expense"
           pageName="CAPEX Record"
@@ -67,6 +77,7 @@ function Capex() {
           onDelete={handleDelete}
         />
       </main>
+      <ModalManager />
     </>
   )
 }
