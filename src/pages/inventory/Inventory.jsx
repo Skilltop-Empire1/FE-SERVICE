@@ -5,7 +5,7 @@ import SearchAndButtons from '../../features/searchAndButtons/SearchAndButtons'
 import EditContent from '../../components/EditViewDelete/EditInventory'
 import ViewContent from '../../components/EditViewDelete/ViewInventory'
 import Delete from '../../features/reusables/EditViewDelete/Delete'
-import { useFetchResourceQuery } from '../../redux/api/generalApi'
+import { useFetchResourceQuery, useDeleteResourceMutation } from '../../redux/api/generalApi'
 import { Trash, Edit2Icon, EyeIcon, Printer } from "lucide-react";
 
 const Inventory = () => {
@@ -14,6 +14,7 @@ const Inventory = () => {
     error: accountError,
     isLoading: accountLoading,
   } = useFetchResourceQuery('/inventory/allInventory')
+  const [deleteResource] = useDeleteResourceMutation();
 
   const navigate = useNavigate()
 
@@ -26,6 +27,8 @@ const Inventory = () => {
   const [isDeleteVisible, setDeleteVisible] = useState(false)
   const [updateData, setUpdateData] = useState()
   const [viewData, setViewData] = useState()
+  const [deleteData, setDeleteData] = useState()
+  const [filteredClients, setFilteredClients] = useState([]);
 
   const toggleEdit = (record) => {
     setModalVisible(!isModalVisible)
@@ -75,8 +78,31 @@ const Inventory = () => {
     }))
   }
 
+      //handle delete
+      const handleAccountDelete = (id) => {
+        setDeleteData(id);
+        toggleDelete();
+      };
+    
+      const handleDelete = async () => {
+        try {
+          await deleteResource(`/inventory/delete/${deleteData}`).unwrap();
+          alert("Inventory detail deleted successfully");
+          toggleDelete();
+          setFilteredClients(
+            filteredClients.filter((service) => service.inventoryId !== deleteData)
+          );
+          window.location.reload()
+        } catch (err) {
+          console.error("Failed to delete Inventory:", err);
+        }
+      };
+
+
+
+
   //table content and table
-  const tableHead = ['Item ID','Resource/Item Name', 'Category', 'Quantity', 'Total Value', 'Assigned To/Location','Date Added', 'Action']
+  const tableHead = ['Item ID','Resource/Item Name', 'Category', 'Quantity', 'Total Value', 'Assigned To','Date Added', 'Action']
   const tableContent = (
     <>
       {fetchedData?.inventory?.map((product, idx) => (
@@ -113,6 +139,7 @@ const Inventory = () => {
                 <p
                   // onClick={updated}
                   className="flex gap-3 text-sm hover:cursor-pointer"
+                  onClick={() =>toggleEdit(product)}
                 >
                   <Edit2Icon size={20} className="text-[250px]" />
                   Edit
@@ -126,6 +153,7 @@ const Inventory = () => {
                 <p
                   // onClick={deleted}
                   className="flex text-sm gap-3 hover:cursor-pointer"
+                  onClick={() => handleAccountDelete(product.inventoryId)}
                 >
                   <Trash size={20} className="text-[250px]" />
                   Delete
@@ -160,9 +188,9 @@ const Inventory = () => {
         tableHead={tableHead}
         tableContent={tableContent} 
       />
-      {isModalVisible && <EditContent close={toggleEdit} />}
+      {isModalVisible && <EditContent close={toggleEdit} data={updateData}/>}
       {isViewVisible && <ViewContent close={toggleView} data={viewData}/>}
-      {isDeleteVisible && <Delete close={toggleDelete} page="Inventory" />}
+      {isDeleteVisible && <Delete close={toggleDelete} page="Inventory" deleted={handleDelete}/>}
     </div>
   )
 }

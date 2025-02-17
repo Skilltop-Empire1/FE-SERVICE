@@ -20,8 +20,13 @@
   
   .table tbody tr td {
     font-family: Inter;
-    color: #2d2d2d;
+    /* color: #2d2d2d; */
     padding: 5px 5px;
+
+  }
+
+  tr {
+    text-align: center;
   }
   
   .icon {
@@ -131,6 +136,7 @@
   
   .table td {
     border-bottom: 1px solid #000;
+    text-align: center;
   }
   
   .icon2 {

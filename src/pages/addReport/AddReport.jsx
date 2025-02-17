@@ -37,19 +37,19 @@ const AddReport = () => {
     const report = formData.get("report") || "";
     const fileUrl = formData.get("file") || "";
   
-    if (!reportTitle || !serviceManager || !reportType || !report || !dateRangeFrom || !dateRangeTo || !fileUrl) {
+    if (!reportTitle || !serviceManager || !reportType || !report || !dateRangeFrom || !dateRangeTo ) {
       setFormError("All fields are required.");
       return;
     }
   
     const payload = {
       reportTitle,
-    //   serviceManager,
+      serviceManager,
       reportType,
       dateRangeFrom,
       dateRangeTo,
       report,
-      fileUrl,
+      // fileUrl,
     };
   
     console.log("Submitting data:", payload);
@@ -126,14 +126,13 @@ const AddReport = () => {
           </div>
           <div >
           <label>Upload Report</label>
-          <input type="file" required name="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" onChange={handleFileChange} />
+          <input type="file"  name="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" onChange={handleFileChange} />
           {file && <p className="mt-2 text-sm text-green-600">Selected: {file.name}</p>}
           </div>
           <div >
             <label >Report Summary</label>
             <input
               type="text"
-              required
               placeholder=''
               name='report'
             />

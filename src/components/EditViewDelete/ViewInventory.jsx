@@ -22,7 +22,7 @@ const ViewInventory = ({close, data}) => {
         <p>{data?.quantity}</p>
       </div>
       <div>
-        <h3 >Assign To/Locations</h3>
+        <h3 >Assign To</h3>
         <p>{data?.assignedTo}</p>
       </div>
       <div>

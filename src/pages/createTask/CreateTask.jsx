@@ -23,14 +23,15 @@ const CreateTask = () => {
   
     const taskTitle = e.target.taskTitle?.value || "";
     const taskStatus = e.target.taskStatus?.value || "";
-    const serviceId = e.target.service?.value || "";
+    const serviceName = e.target.service?.value || "";
     const description = e.target.description?.value || "";
+    // const email = e.target.email?.value || "";
     const priority = e.target.priority?.value || "";
     const dueDate = e.target.dueDate?.value || "";
     const assignedTo = e.target.assignedTo?.value || "";
     const file = e.target.fileName?.files?.[0] || null;
   
-    if (!taskTitle || !taskStatus || !serviceId || !description || !priority || !dueDate || !assignedTo) {
+    if (!taskTitle || !taskStatus || !serviceName || !description || !priority || !dueDate || !assignedTo ) {
       setFormError("All fields except file upload are required.");
       return;
     }
@@ -38,13 +39,14 @@ const CreateTask = () => {
     const formData = new FormData();
     formData.append("taskTitle", taskTitle);
     formData.append("taskStatus", taskStatus);
-    formData.append("servName", serviceId);
+    formData.append("servName", serviceName);
     formData.append("description", description);
+    formData.append("email", assignedTo);
     formData.append("priority", priority);
     formData.append("dueDate", dueDate);
-    // formData.append("assignedTo", assignedTo);
+    // formData.append("AssignTo", assignedTo);
     if (file) {
-      formData.append("file", file);
+      formData.append("fileUrl", file);
     }
   
     try {
@@ -55,6 +57,7 @@ const CreateTask = () => {
   
       alert("Task created successfully");
       e.target.reset();
+      goBack()
       window.location.reload();
     } catch (error) {
       console.error("Error creating task:", error);
@@ -75,8 +78,9 @@ const CreateTask = () => {
         <select name="taskStatus" required>
           <option value="">Select Status</option>
           <option value="To do">To Do</option>
-          <option value="In progress">In Progress</option>
-          <option value="Complete">Completed</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
         </select>
       </div>
       <div>
@@ -84,7 +88,7 @@ const CreateTask = () => {
         <select name="service" required>
           <option value="">Select Service</option>
           {fetchedData?.services?.map((data) => (
-            <option key={data.serviceId} value={data.serviceName}>
+            <option value={data.serviceName}>
               {data.serviceName}
             </option>
           ))}
@@ -94,14 +98,18 @@ const CreateTask = () => {
         <label>Description</label>
         <input type="text" required placeholder="Enter Brief Description" name="description" />
       </div>
+      {/* <div>
+        <label>email</label>
+        <input type="text" required placeholder="Enter email" name="email" />
+      </div> */}
       <div>
         <label>Assigned To</label>
         <select name="assignedTo" required>
           <option value="">Select Service Manager</option>
           {employeeData?.getEmployees?.map((data) => (
-            <option key={data.userId} value={data.userId}>
+            <option key={data.userId} value={data.email}>
               {data.email}
-            </option>
+          </option>
           ))}
         </select>
       </div>
