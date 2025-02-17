@@ -7,6 +7,7 @@ import CapexView from './capexView/CapexView'
 import { closeModal } from '@src/redux/slices/modalSlice'
 
 import styles from './ModalManager.module.css'
+import Logout from '../logout/Logout'
 
 function ModalManager() {
   const dispatch = useDispatch()
@@ -30,6 +31,9 @@ function ModalManager() {
         return <CapexView {...modalProp} onClose={handleClose} />
       case 'DELETE':
         return
+
+      case 'LOGOUT':
+        return <Logout />
       default:
         return null
     }

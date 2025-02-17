@@ -1,0 +1,54 @@
+/* Logout.module.css */
+.logoutModal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 50px auto;
+}
+
+.logoutMessage {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.logoutButtons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancelBtn {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.cancelBtn:hover {
+  background-color: #e0e0e0;
+}
+
+.logoutBtn {
+  background-color: #ff4c4c;
+  color: white;
+}
+
+.logoutBtn:hover {
+  background-color: #e03e3e;
+}
+
+button:focus {
+  outline: none;
+}

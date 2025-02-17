@@ -1,7 +1,14 @@
 import React from 'react'
 import styles from './CapexView.module.css'
 
-function CapexView({ item }) {
+function CapexView({ modalProp, onClose }) {
+  if (!modalProp) {
+    console.error('Error: modalProp is undefined in CapexView')
+    return null
+  }
+
+  console.log('clicked item:', modalProp)
+
   return (
     <section className={styles.container} aria-labelledby="capex-title">
       <header>
@@ -10,48 +17,40 @@ function CapexView({ item }) {
         </h2>
       </header>
 
-      {/* <dl className={styles.table}>
+      <dl className={styles.table}>
         <div className={styles.row}>
           <dt className={styles.label}>Expense Category:</dt>
-          <dd className={styles.value}>{item.capexCategory}</dd>
+          <dd className={styles.value}>{modalProp.capexCategory}</dd>
         </div>
         <div className={styles.row}>
           <dt className={styles.label}>Payment Method:</dt>
-          <dd className={styles.value}>{item.paymentMethod}</dd>
+          <dd className={styles.value}>{modalProp.paymentMethod}</dd>
         </div>
         <div className={styles.row}>
           <dt className={styles.label}>Expense Description:</dt>
-          <dd className={styles.value}>{item.assetDescription}</dd>
+          <dd className={styles.value}>{modalProp.assetDescription}</dd>
         </div>
         <div className={styles.row}>
           <dt className={styles.label}>Vendor/Payee (Optional):</dt>
-          <dd className={styles.value}>{item.vendor || 'N/A'}</dd>
+          <dd className={styles.value}>{modalProp.vendor || 'N/A'}</dd>
         </div>
         <div className={styles.row}>
           <dt className={styles.label}>Amount:</dt>
-          <dd className={styles.value}>{item.price}</dd>
+          <dd className={styles.value}>{modalProp.amount}</dd>
         </div>
         <div className={styles.row}>
           <dt className={styles.label}>Notes:</dt>
-          <dd className={styles.value}>{item.note || 'N/A'}</dd>
+          <dd className={styles.value}>{modalProp.note || 'N/A'}</dd>
         </div>
         <div className={styles.row}>
           <dt className={styles.label}>Date of Expense:</dt>
-          <dd className={styles.value}>{item.dateOfExpenses}</dd>
+          <dd className={styles.value}>{modalProp.date}</dd>
         </div>
-        <div className={styles.row}>
-          <dt className={styles.label}>Receipt:</dt>
-          <dd className={styles.value}>
-            {item.receipt ? (
-              <a href={item.receipt} target="_blank" rel="noopener noreferrer">
-                View Receipt
-              </a>
-            ) : (
-              'No Receipt Available'
-            )}
-          </dd>
-        </div>
-      </dl> */}
+      </dl>
+
+      <button className={styles.closeButton} onClick={onClose}>
+        Close
+      </button>
     </section>
   )
 }

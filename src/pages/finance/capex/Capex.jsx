@@ -17,7 +17,7 @@ function Capex() {
   const dispatch = useDispatch()
 
   const handleView = (item) => {
-    dispatch(openModal({ modalType: 'VIEW_CAPEX', modalProps: { item } }))
+    dispatch(openModal({ modalType: 'VIEW_CAPEX', modalProps: item || {} }))
     console.log('view capex data clicked', item)
   }
 
@@ -30,17 +30,33 @@ function Capex() {
     console.log('Delete:', item)
   }
 
-  const renderRow = (item) => (
-    <>
-      <td>{item.capexCategory}</td>
-      <td>{item.assetDescription}</td>
-      <td>{`$${item.amount.toLocaleString()}`}</td>
-      <td>{item.percentOfTotalCapex}%</td>
-      <td>{item.dateOfExpenses}</td>
-      <td>{item.expectedLifeSpan} years</td>
-      <td>{item.depreciationRate}%</td>
-    </>
+  const totalExpense = capexData?.reduce(
+    (total, item) => (total += item.amount),
+    0,
   )
+  const renderRow = (item) => {
+    const percentOfTotal = totalExpense ? (item.amount / totalExpense) * 100 : 0
+    const formattedDate = (dateString) => {
+      return dateString
+        ? new Date(dateString).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          })
+        : 'N/A'
+    }
+    return (
+      <>
+        <td>{item.capexCategory}</td>
+        <td>{item.assetDescription}</td>
+        <td>{`$${item.amount.toLocaleString()}`}</td>
+        <td>{percentOfTotal.toFixed(2)}%</td>
+        <td>{formattedDate}</td>
+        <td>{item.expectedLifeSpan} years</td>
+        <td>{item.depreciationRate}%</td>
+      </>
+    )
+  }
 
   const filteredData = useMemo(() => {
     if (!capexData) return []
@@ -50,7 +66,8 @@ function Capex() {
         item?.capexCategory?.toLowerCase().includes(query.toLowerCase()) ||
         item?.assetDescription
           ?.toLocaleLowerCase()
-          .includes(query.toLowerCase()),
+          .includes(query.toLowerCase()) ||
+        String(item?.amount).includes(query),
     )
   }, [query, capexData])
 
@@ -68,7 +85,7 @@ function Capex() {
       </header>
       <main>
         <Table
-          getId={(item) => item.id}
+          getId={(item) => item.financeId}
           headers={capexHeaders}
           data={filteredData}
           renderRow={renderRow}
