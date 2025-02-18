@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
-import SearchAndButtons from '../../features/searchAndButtons/SearchAndButtons'
+import SearchAndButtons from '../../features/searchAndButtons/SearchAndButtons2'
 import Table from '../../features/reusables/Table'
 import { Navigate, useNavigate } from 'react-router'
 // import EditContent from '@src/components/EditViewDelete/EditContent'
@@ -128,7 +128,7 @@ const Services = () => {
   const tableHead = ['Service Name','Price', 'Average TAT (Duration)', 'Service Manager', 'Phone Number', 'Date Added', 'Action']
   const tableContent =  
       <>
-        {currentData.map((product, idx) => (
+        {currentData?.map((product, idx) => (
           <tr> {/* Ensure the key is unique */}
             <td>{product.serviceName}</td>
             <td>{product.price}</td>

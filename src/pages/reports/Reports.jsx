@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
-import SearchAndButtons from '../../features/searchAndButtons/SearchAndButtons'
+import SearchAndButtons from '../../features/searchAndButtons/SearchAndButtons2'
 import Table from '../../features/reusables/Table'
 import { Navigate, useNavigate } from 'react-router'
 // import EditContent from '@src/components/EditViewDelete/EditContent'

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Navigate, useNavigate } from 'react-router'
 import Table from '../../features/reusables/Table'
-import SearchAndButtons from '../../features/searchAndButtons/SearchAndButtons'
+import SearchAndButtons from '../../features/searchAndButtons/SearchAndButtons2'
 import EditContent from '../../components/EditViewDelete/EditInventory'
 import ViewContent from '../../components/EditViewDelete/ViewInventory'
 import Delete from '../../features/reusables/EditViewDelete/Delete'
@@ -119,7 +119,7 @@ const Inventory = () => {
   const tableHead = ['Item ID','Resource/Item Name', 'Category', 'Quantity', 'Total Value', 'Assigned To','Date Added', 'Action']
   const tableContent = (
     <>
-      {currentData.map((product, idx) => (
+      {currentData?.map((product, idx) => (
         <tr>
           <td>{product.itemId}</td>
             <td>
