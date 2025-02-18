@@ -1,9 +1,20 @@
-const headers = [
+const opexHeaders = [
   'Opex Category',
   'Description',
   'Amount',
   '% of Total Expense',
   'Month over Month Change',
+  'Actions',
+]
+
+const capexHeaders = [
+  'Capex Category',
+  'Asset Description',
+  'Amount',
+  'Percent Of Total Capex',
+  'Date Of Expenses',
+  'Expected LifeSpan',
+  'Depreciation Rate',
   'Actions',
 ]
 
@@ -100,4 +111,107 @@ const opexData = [
   },
 ]
 
-export { headers, opexData }
+const capexData = [
+  {
+    id: 1, // Added ID
+    capexCategory: 'Equipment',
+    assetDescription: 'Industrial Printer',
+    amount: 50000,
+    percentOfTotalCapex: 25,
+    dateOfExpenses: '2025-01-01',
+    expectedLifeSpan: 5,
+    depreciationRate: 20,
+  },
+  {
+    id: 2, // Added ID
+    capexCategory: 'Infrastructure',
+    assetDescription: 'Building Renovation',
+    amount: 100000,
+    percentOfTotalCapex: 50,
+    dateOfExpenses: '2025-01-15',
+    expectedLifeSpan: 20,
+    depreciationRate: 5,
+  },
+  {
+    id: 3, // Added ID
+    capexCategory: 'Technology',
+    assetDescription: 'IT System Upgrade',
+    amount: 30000,
+    percentOfTotalCapex: 15,
+    dateOfExpenses: '2025-01-20',
+    expectedLifeSpan: 3,
+    depreciationRate: 33,
+  },
+  {
+    id: 4, // Added ID
+    capexCategory: 'Vehicles',
+    assetDescription: 'Delivery Truck',
+    amount: 20000,
+    percentOfTotalCapex: 10,
+    dateOfExpenses: '2025-01-22',
+    expectedLifeSpan: 7,
+    depreciationRate: 14,
+  },
+  {
+    id: 5, // Added ID
+    capexCategory: 'Equipment',
+    assetDescription: 'CNC Machine',
+    amount: 75000,
+    percentOfTotalCapex: 15,
+    dateOfExpenses: '2025-02-01',
+    expectedLifeSpan: 10,
+    depreciationRate: 10,
+  },
+  {
+    id: 6, // Added ID
+    capexCategory: 'Infrastructure',
+    assetDescription: 'Parking Lot Expansion',
+    amount: 150000,
+    percentOfTotalCapex: 30,
+    dateOfExpenses: '2025-02-10',
+    expectedLifeSpan: 25,
+    depreciationRate: 4,
+  },
+  {
+    id: 7, // Added ID
+    capexCategory: 'Technology',
+    assetDescription: 'Enterprise Software',
+    amount: 50000,
+    percentOfTotalCapex: 20,
+    dateOfExpenses: '2025-02-15',
+    expectedLifeSpan: 5,
+    depreciationRate: 20,
+  },
+  {
+    id: 8, // Added ID
+    capexCategory: 'Vehicles',
+    assetDescription: 'Forklift',
+    amount: 35000,
+    percentOfTotalCapex: 7,
+    dateOfExpenses: '2025-02-20',
+    expectedLifeSpan: 8,
+    depreciationRate: 12,
+  },
+  {
+    id: 9, // Added ID
+    capexCategory: 'Equipment',
+    assetDescription: 'Laser Cutter',
+    amount: 60000,
+    percentOfTotalCapex: 22,
+    dateOfExpenses: '2025-02-25',
+    expectedLifeSpan: 7,
+    depreciationRate: 15,
+  },
+  {
+    id: 10, // Added ID
+    capexCategory: 'Infrastructure',
+    assetDescription: 'Office Building HVAC System',
+    amount: 120000,
+    percentOfTotalCapex: 18,
+    dateOfExpenses: '2025-02-28',
+    expectedLifeSpan: 15,
+    depreciationRate: 6,
+  },
+]
+
+export { opexHeaders, opexData, capexData, capexHeaders }

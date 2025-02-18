@@ -1,5 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import AddOpex from './pages/finance/opex/addOpex/AddOpex'
+import AddCapex from './pages/finance/capex/addCapex/addCapex'
 
 // Lazy load pages
 const Home = lazy(() => import('./pages/home/Home'))
@@ -146,10 +148,26 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: 'finance/opex/add-opex',
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <AddOpex />
+          </Suspense>
+        ),
+      },
+      {
         path: 'finance/capex',
         element: (
           <Suspense fallback={<div>Loading...</div>}>
             <Capex />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'finance/capex/add-capex',
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <AddCapex />
           </Suspense>
         ),
       },
