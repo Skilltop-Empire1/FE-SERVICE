@@ -4,17 +4,13 @@ const generalApi = createApi({
   reducerPath: 'department',
   baseQuery: fetchBaseQuery({
      baseUrl: 'https://be-service-885t.onrender.com',
-     prepareHeaders: (headers) => {
-      const user = localStorage.getItem('user'); // Get the user object
-      const token = user ? JSON.parse(user).token : null; // Parse the object and extract the token
-
-      
-
-      // console.log('Token in state:', token);
+     prepareHeaders: (headers, { getState }) => {
+      // Fallback to localStorage if token is not in Redux
+      const token = getState()?.auth?.token || localStorage.getItem('token')
       if (token) {
-        headers.set('Authorization', `Bearer ${token}`); // Attach the token to the header
+        headers.set('Authorization', `Bearer ${token}`)
       }
-      return headers;
+      return headers
     },
      }),
   endpoints: (builder) => ({

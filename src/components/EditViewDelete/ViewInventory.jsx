@@ -1,37 +1,37 @@
 import View from '../../features/reusables/EditViewDelete/View'
 import React from 'react'
 
-const ViewInventory = ({close}) => {
+const ViewInventory = ({close, data}) => {
 
     const formContent = 
     <>
       <div>
         <h3 >Item Name</h3>
-        <p>Text goes here</p>
+        <p>{data?.itemName}</p>
       </div>
       <div>
         <h3 >Category</h3>
-        <p>Text goes here</p>
+        <p>{data?.category}</p>
       </div>
       <div>
         <h3 >Item Id</h3>
-        <p>Text goes here</p>
+        <p>{data?.itemId}</p>
       </div>
       <div >
         <h3 >Quantity</h3>
-        <p>Text goes here</p>
+        <p>{data?.quantity}</p>
       </div>
       <div>
-        <h3 >Assign To/Locations</h3>
-        <p>Text goes here</p>
+        <h3 >Assign To</h3>
+        <p>{data?.assignedTo}</p>
       </div>
       <div>
         <h3 >Date Purchased</h3>
-        <p>Text goes here</p>
+        <p>{data?.datePurchased}</p>
       </div>
       <div>
         <h3 >Note</h3>
-        <p>Text goes here</p>
+        <p>{data?.note}</p>
       </div>
     </>
 

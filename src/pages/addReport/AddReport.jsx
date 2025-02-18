@@ -5,12 +5,18 @@ import { usePostResourceMutation, useFetchResourceQuery } from '../../redux/api/
 import OutlinedButton from '../../features/reusables/Buttons/OutlinedButton';
 import FilledButton from '../../features/reusables/Buttons/FilledButton';
 
-const AddService = () => {
+const AddReport = () => {
   const navigate = useNavigate()
   const [postResource, { isSuccess, isLoading, error }] = usePostResourceMutation();
   const { data: employeeData, isLoading: dataLoading, isError: dataError } = useFetchResourceQuery('/employee/list');
   const [formError, setFormError] = useState(null);
-  const goBack = () =>   navigate('/app/Services')
+  const [file, setFile] = useState(null);
+  const goBack = () =>   navigate('/app/reports')
+
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
 
 
 
@@ -23,32 +29,35 @@ const AddService = () => {
   
     console.log("Form data:", Object.fromEntries(formData.entries())); // Debugging
   
-    const serviceName = formData.get("serviceName") || "";
+    const reportTitle = formData.get("reportTitle") || "";
     const serviceManager = formData.get("serviceManager") || "";
-    const phoneNumber = formData.get("phoneNo") || "";
-    const price = formData.get("price") || "";
-    const duration = formData.get("duration") || "";
-    const description = formData.get("description") || "";
+    const reportType = formData.get("reportType") || "";
+    const dateRangeFrom = formData.get("dateRangeFrom") || "";
+    const dateRangeTo = formData.get("dateRangeTo") || "";
+    const report = formData.get("report") || "";
+    const fileUrl = formData.get("file") || "";
   
-    if (!serviceName || !serviceManager || !phoneNumber || !description || !price || !duration) {
+    if (!reportTitle || !serviceManager || !reportType || !report || !dateRangeFrom || !dateRangeTo ) {
       setFormError("All fields are required.");
       return;
     }
   
     const payload = {
-      serviceName,
+      reportTitle,
       serviceManager,
-      phoneNumber,
-      price,
-      duration,
-      description,
+      reportType,
+      dateRangeFrom,
+      dateRangeTo,
+      report,
+      // fileUrl,
     };
   
     console.log("Submitting data:", payload);
   
     try {
       await postResource({
-        url: "/service/create",
+        url: "/report/create",
+        headers: { "Content-Type": "multipart/form-data" },
         data: payload, // Send as JSON instead of FormData unless backend expects multipart/form-data
       }).unwrap();
   
@@ -66,21 +75,21 @@ const AddService = () => {
   <form onSubmit={handleSubmit} id="add-client-form">
          <span className='md:grid grid-cols-2 gap-5'>
           <div >
-            <label >Service Name</label>
+            <label >Report Title</label>
             <input
               type=""
               required
-              placeholder='Service Name'
-              name='serviceName'
+              placeholder='Report Title'
+              name='reportTitle'
             />
           </div>
           <div >
-            <label >Service Manager</label>
+            <label >Created By</label>
             <select
               required
               name='serviceManager'
             >
-              <option value="">Select Service Manager</option>
+              <option value="">Select Employee</option>
               {employeeData?.getEmployees?.map((data) => (
                 <option key={data.userId} value={data.userId}>
                   {data.email}
@@ -89,39 +98,43 @@ const AddService = () => {
             </select>
           </div>
           <div >
-            <label >Price</label>
+            <label >Date Range(from)</label>
             <input
-              type="number"
+              type="date"
               required
-              placeholder='Price'
-              name='price'
+              placeholder=''
+              name='dateRangeFrom'
             />
           </div>
           <div >
-            <label >Phone Number</label>
+            <label >Date Range(To)</label>
             <input
-              type="number"
+              type="date"
               required
-              placeholder='Phone Number'
-              name='phoneNo'
+              placeholder=''
+              name='dateRangeTo'
             />
           </div>
           <div >
-            <label >Average TAT (Duration)</label>
+            <label >Report Type</label>
             <input
               type="text"
               required
-              placeholder='Average TAT (Duration)'
-              name='duration'
+              placeholder=''
+              name='reportType'
             />
           </div>
           <div >
-            <label >Description</label>
+          <label>Upload Report</label>
+          <input type="file"  name="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" onChange={handleFileChange} />
+          {file && <p className="mt-2 text-sm text-green-600">Selected: {file.name}</p>}
+          </div>
+          <div >
+            <label >Report Summary</label>
             <input
               type="text"
-              required
-              placeholder='Description'
-              name='description'
+              placeholder=''
+              name='report'
             />
           </div>
          </span>
@@ -134,7 +147,7 @@ const AddService = () => {
                     // onChange={addAnother}
                     className={`flex items-center justify-center`}
                   />
-                  <label htmlFor="check">{'Add another Client'}</label>
+                  <label htmlFor="check">{'Add another report'}</label>
                 </span>
 
                 <span className="mt-5 flex justify-around gap-2 px-2">
@@ -142,6 +155,7 @@ const AddService = () => {
                   <FilledButton content={'Save'}/>
                 </span>
         </span>
+        {formError}
   </form>
 
 
@@ -150,14 +164,13 @@ const AddService = () => {
     <div className='h-full'>
         {/* use the addAnother to implement the logic to remain on the page if checked */}
         <AddModal
-          header={'Add Service'} 
+          header={'Add Report'} 
           formContent={formContent} 
           close={goBack} 
-          anotherContent={'Add another service'}
           
         />
     </div>
   )
 }
 
-export default AddService
+export default AddReport

@@ -15,6 +15,7 @@ const Clients = lazy(() => import('./pages/clients/Clients'))
 const Inventory = lazy(() => import('./pages/inventory/Inventory'))
 const Finance = lazy(() => import('./pages/finance/Finance'))
 const Reports = lazy(() => import('./pages/reports/Reports'))
+const AddReport = lazy(() => import('./pages/addReport/AddReport'))
 const Communications = lazy(
   () => import('./pages/communications/Communications'),
 )
@@ -175,6 +176,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<div>Loading...</div>}>
             <Reports />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'addReport',
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <AddReport />
           </Suspense>
         ),
       },

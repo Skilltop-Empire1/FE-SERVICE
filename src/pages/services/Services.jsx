@@ -5,8 +5,8 @@ import { Navigate, useNavigate } from 'react-router'
 // import EditContent from '@src/components/EditViewDelete/EditContent'
 import EditContent from '../../components/EditViewDelete/EditService'
 import ViewContent from '../../components/EditViewDelete/ViewService'
-import Delete from '@src/features/reusables/EditViewDelete/Delete'
-import { useFetchResourceQuery } from '@src/redux/api/generalApi'
+import Delete from '../../features/reusables/EditViewDelete/Delete'
+import { useFetchResourceQuery, useDeleteResourceMutation } from '../../redux/api/generalApi'
 import { Trash, Edit2Icon, EyeIcon, Printer } from "lucide-react";
 
 const Services = () => {
@@ -16,6 +16,7 @@ const Services = () => {
     error: accountError,
     isLoading: accountLoading,
   } = useFetchResourceQuery("/service/allServices");
+  const [deleteResource] = useDeleteResourceMutation();
 
 
   const navigate = useNavigate()
@@ -29,6 +30,8 @@ const Services = () => {
   const [isDeleteVisible, setDeleteVisible] = useState(false)
   const [updateData, setUpdateData] = useState()
   const [viewData, setViewData] = useState()
+  const [deleteData, setDeleteData] = useState()
+  const [filteredClients, setFilteredClients] = useState([]);
 
   const toggleEdit = (record) => {
     setModalVisible(!isModalVisible)
@@ -55,6 +58,10 @@ const Services = () => {
     // const endIndex = Math.min(startIndex + itemsPerPage, fetchedData.length);
     // const currentData = api.slice(startIndex, endIndex);
   
+        //navigation
+        const goToPage = (page) => {
+          setCurrentPage(page);
+        };
 
   
   //action buttons toggle
@@ -78,6 +85,27 @@ const Services = () => {
   };
 
 
+    //handle delete
+    const handleAccountDelete = (id) => {
+      setDeleteData(id);
+      toggleDelete();
+    };
+  
+    const handleDelete = async () => {
+      try {
+        await deleteResource(`/service/delete/${deleteData}`).unwrap();
+        alert("Service detail deleted successfully");
+        toggleDelete();
+        setFilteredClients(
+          filteredClients.filter((service) => service.serviceId !== deleteData)
+        );
+        window.location.reload()
+      } catch (err) {
+        console.error("Failed to delete Service:", err);
+      }
+    };
+
+
 
 
 
@@ -87,21 +115,22 @@ const Services = () => {
   const tableHead = ['Service Name','Price', 'Average TAT (Duration)', 'Service Manager', 'Phone Number', 'Date Added', 'Action']
   const tableContent =  
       <>
-        {fetchedData?.map((product, idx) => (
+        {fetchedData?.services?.map((product, idx) => (
           <tr> {/* Ensure the key is unique */}
-          <td>{product.taskTitle}</td>
-            <td>hello</td>
+            <td>{product.serviceName}</td>
+            <td>{product.price}</td>
             <td>
-              {product.taskStatus}
+              {product.duration}
             </td>
-            <td>{product.priority}</td>
-            <td>{product.dueDate}</td>
+            <td>{product.serviceManager}</td>
+            <td>{product.phoneNumber == null ? 'NIL' : product.phoneNumber}</td>
+            <td>{product.addedDate.slice(0,10)}</td>
             <td>
         <div onClick={() => openAction(idx)} className='relative text-center hover:cursor-pointer'>
           ...
         </div>
         {action[idx] && (
-          <div className={`absolute bg-[#fff] p-[10px] h-[150px] w-[100px] text-center flex flex-col justify-around shadow-lg shadow-[rgba(168,162,162,0.75)]`} ref={actionRef}>
+          <div className={`absolute bg-[#fff] z-10 p-[10px] h-[150px] w-[100px] text-center flex flex-col justify-around shadow-lg shadow-[rgba(168,162,162,0.75)]`} ref={actionRef}>
             <p
               className="flex gap-3 text-sm hover:cursor-pointer"
               onClick={() =>toggleView(product)}
@@ -113,6 +142,7 @@ const Services = () => {
             <p
               // onClick={updated}
               className="flex gap-3 text-sm hover:cursor-pointer"
+              onClick={() =>toggleEdit(product)}
             >
               <Edit2Icon size={20} className='text-[250px]' />
               Edit
@@ -126,6 +156,7 @@ const Services = () => {
             <p
               // onClick={deleted}
               className="flex text-sm gap-3 hover:cursor-pointer"
+              onClick={() => handleAccountDelete(product.serviceId)}
             >
               <Trash size={20} className='text-[250px]' />
               Delete
@@ -142,20 +173,20 @@ const Services = () => {
   return (
     <div>
         <SearchAndButtons pageName={'Service'} buttonName={'+ Add Service'} handleClick={goTo}/>
-        <Table  tableHead={tableHead} updated={toggleEdit} view={toggleView} deleted={toggleDelete} tableContent={tableContent}/>
+        <Table  tableHead={tableHead} tableContent={tableContent}/>
         {isModalVisible && 
         (
-          <EditContent close={toggleEdit}/>
+          <EditContent close={toggleEdit} data={updateData}/>
         )
         }
         {isViewVisible && 
         (
-          <ViewContent close={toggleView}/>
+          <ViewContent close={toggleView} data={viewData}/>
         )
         }
         {isDeleteVisible && 
         (
-          <Delete close={toggleDelete} page='service'/>
+          <Delete close={toggleDelete} page='service' deleted={handleDelete}/>
         )
         }
 
