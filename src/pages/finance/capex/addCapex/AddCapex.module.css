@@ -1,0 +1,162 @@
+.formHeader {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 3rem;
+  margin-bottom: 24px;
+  color: #3d3d3d;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.formContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.formColumn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 100px;
+  margin-bottom: 40px;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: 8px;
+}
+
+.formRow label {
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.5125rem;
+  letter-spacing: -2%;
+  color: #464646;
+}
+
+.formRow select,
+textarea,
+input {
+  width: 100%;
+  height: 48px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #33333380;
+}
+
+.formRow input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.formRow textarea:first-child {
+  height: 98px;
+}
+
+.formRow textarea:last-child {
+  height: 149px;
+}
+.actionGroup {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 107px;
+}
+
+.addMoreCheckbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.addMoreCheckbox input {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  border: 2px solid var(--primary-color);
+  position: relative;
+}
+
+.addMoreCheckbox input:checked {
+  background-color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  color: var(--background);
+}
+
+.addMoreCheckbox input:checked::before {
+  content: '✔';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.addMoreCheckbox label {
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.5125rem;
+  letter-spacing: -2%;
+  color: #2563eb;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 92px;
+}
+
+.actionButtons button {
+  width: 212px;
+  height: 54;
+  padding: 16px 68px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 1px 0px #171a1f12;
+  box-shadow: 0px 0px 2px 0px #171a1f1f;
+}
+
+.actionButtons .cancelButton {
+  color: var(--primary-color);
+  background-color: var(--background);
+  border: 1px solid var(--primary-color);
+}
+
+.actionButtons .cancelButton:hover {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--background);
+}
+
+.actionButtons .submitButton {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--background);
+}
+
+.actionButtons .submitButton:hover {
+  color: var(--primary-color);
+  background-color: var(--background);
+  border: 1px solid var(--primary-color);
+}

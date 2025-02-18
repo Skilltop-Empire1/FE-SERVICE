@@ -3,7 +3,7 @@ import style from './Table.module.css'
 import { Edit, Eye, MoreHorizontal, Trash } from 'lucide-react'
 
 const ActionCell = ({ item, onView, onEdit, onDelete }) => {
-  console.log('i am clicked on a cell', item.id)
+  console.log('i am clicked on a cell', item.financeId)
 
   return (
     <ul className={style.buttonRow}>

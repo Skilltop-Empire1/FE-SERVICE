@@ -1,4 +1,4 @@
-const headers = [
+const opexHeaders = [
   'Opex Category',
   'Description',
   'Amount',
@@ -214,4 +214,4 @@ const capexData = [
   },
 ]
 
-export { headers, opexData, capexData, capexHeaders }
+export { opexHeaders, opexData, capexData, capexHeaders }

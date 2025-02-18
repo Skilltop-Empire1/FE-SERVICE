@@ -17,7 +17,7 @@ const accountApi = createApi({
   endpoints: (builder) => ({
     getOpex: builder.query({
       query: () => ({
-        url: '/api/IMS/expenditure/list?opex=true',
+        url: 'finance/get?opex=true',
       }),
       providesTags: ['opex'], // Provides "opex" tag
     }),
@@ -40,17 +40,17 @@ const accountApi = createApi({
     }),
 
     addOpex: builder.mutation({
-      query: ({ type, data }) => ({
-        url: '/api/IMS/expenditure/create',
+      query: ({ data }) => ({
+        url: '/finance/create',
         method: 'POST',
-        body: { ...data, type },
+        body: data,
       }),
       invalidatesTags: ['opex'], // Invalidates "opex" tag
     }),
 
     getCapex: builder.query({
       query: () => ({
-        url: '/finance',
+        url: '/finance/get?capex=true',
       }),
       providesTags: ['capex'], // Provides "capex" tag
     }),
@@ -65,10 +65,10 @@ const accountApi = createApi({
     }),
 
     addCapex: builder.mutation({
-      query: ({ data, type }) => ({
-        url: '/api/IMS/expenditure/create',
+      query: ({ data }) => ({
+        url: '/finance/create',
         method: 'POST',
-        body: { ...data, type },
+        body: data,
       }),
       invalidatesTags: ['capex'], // Invalidates "capex" tag
     }),

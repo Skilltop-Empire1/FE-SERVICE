@@ -13,12 +13,13 @@ import {
   MessageCircleMore,
   Plus,
   X,
-  ClipboardList
+  ClipboardList,
 } from 'lucide-react'
 import styles from './SideNav.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleMenu } from '../../redux/slices/toggleMenuSlice'
 import { useEffect, useRef } from 'react'
+import { openModal } from '@src/redux/slices/modalSlice'
 
 
 function SideNav() {
@@ -216,7 +217,11 @@ function SideNav() {
             </NavLink>
           </li>
           <li>
-            <div role="button" className={styles.logout}>
+            <div
+              onClick={() => dispatch(openModal({ modalType: 'LOGOUT' }))}
+              role="button"
+              className={styles.logout}
+            >
               <LogOut className={styles.logoutIcon} />
               <span>Logout</span>
             </div>

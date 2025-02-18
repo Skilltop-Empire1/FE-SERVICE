@@ -3,5 +3,17 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tsconfigPaths()],
+
+  resolve: {
+    alias: {
+      '@src': '/src', // alias for the src folder
+      '@components': '/src/components', // alias for the components folder
+    },
+  },
+  server: {
+    port: 5173, // port for the development server
+    open: true, // open the browser on start
+  },
+
 })
