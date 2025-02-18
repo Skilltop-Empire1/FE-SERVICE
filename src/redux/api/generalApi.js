@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const generalApi = createApi({
   reducerPath: 'department',
   baseQuery: fetchBaseQuery({
-     baseUrl: 'https://be-service-885t.onrender.com',
+     baseUrl: 'https://be-service-servicapp.up.railway.app/',
      prepareHeaders: (headers, { getState }) => {
       // Fallback to localStorage if token is not in Redux
       const token = getState()?.auth?.token || localStorage.getItem('token')
