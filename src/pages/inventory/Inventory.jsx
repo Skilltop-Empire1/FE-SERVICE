@@ -23,6 +23,7 @@ const Inventory = () => {
   }
 
   const [isModalVisible, setModalVisible] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
   const [isViewVisible, setViewVisible] = useState(false)
   const [isDeleteVisible, setDeleteVisible] = useState(false)
   const [updateData, setUpdateData] = useState()
@@ -40,23 +41,36 @@ const Inventory = () => {
   }
   const toggleDelete = () => setDeleteVisible(!isDeleteVisible)
 
+  const handleSearch = (term) => {
+    setSearchTerm(term.toLowerCase())
+  }
+
+      //filter
+  // Use filtered items for table
+    const filteredItems = fetchedData?.inventory?.filter((item) => {
+      const matchesSearch = item?.itemName?.toLowerCase().includes(searchTerm);
+      // const matchesCategory = filterCategory === 'all' || item?.paymentOption === filterCategory;
+      return matchesSearch ;
+    });
+
   //pagination
   const [action, setAction] = useState({})
   // const [selectedRows, setSelectedRows] = useState([]);
   const actionRef = useRef(null)
 
-  // const itemsPerPage = 10;
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const totalPages = Math.ceil(fetchedData.length / itemsPerPage);
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = filteredItems ? Math.ceil(filteredItems.length / itemsPerPage) : 0;
 
-  // const startIndex = (currentPage - 1) * itemsPerPage;
-  // const endIndex = Math.min(startIndex + itemsPerPage, fetchedData.length);
-  // const currentData = api.slice(startIndex, endIndex);
 
-  //navigation
-  const goToPage = (page) => {
-    setCurrentPage(page)
-  }
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = Math.min(startIndex + itemsPerPage, filteredItems?.length);
+  const currentData = filteredItems?.slice(startIndex, endIndex);
+
+      //navigation
+      const goToPage = (page) => {
+        setCurrentPage(page);
+      };
 
   //action buttons toggle
   useEffect(() => {
@@ -105,7 +119,7 @@ const Inventory = () => {
   const tableHead = ['Item ID','Resource/Item Name', 'Category', 'Quantity', 'Total Value', 'Assigned To','Date Added', 'Action']
   const tableContent = (
     <>
-      {fetchedData?.inventory?.map((product, idx) => (
+      {currentData.map((product, idx) => (
         <tr>
           <td>{product.itemId}</td>
             <td>
@@ -183,10 +197,17 @@ const Inventory = () => {
         pageName={'Inventory'}
         buttonName={'+ Add Inventory'}
         handleClick={goTo}
+        handleSearch={handleSearch}
+        searchTerm={searchTerm}
       />
       <Table
         tableHead={tableHead}
         tableContent={tableContent} 
+        currentPage={currentPage}
+         totalPages={totalPages}
+         itemsPerPage={itemsPerPage}
+         api={currentData}
+         startIndex={startIndex}
       />
       {isModalVisible && <EditContent close={toggleEdit} data={updateData}/>}
       {isViewVisible && <ViewContent close={toggleView} data={viewData}/>}

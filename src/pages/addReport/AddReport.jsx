@@ -30,26 +30,26 @@ const AddReport = () => {
     console.log("Form data:", Object.fromEntries(formData.entries())); // Debugging
   
     const reportTitle = formData.get("reportTitle") || "";
-    const serviceManager = formData.get("serviceManager") || "";
+    // const serviceManager = formData.get("serviceManager") || "";
     const reportType = formData.get("reportType") || "";
     const dateRangeFrom = formData.get("dateRangeFrom") || "";
     const dateRangeTo = formData.get("dateRangeTo") || "";
     const report = formData.get("report") || "";
     const fileUrl = formData.get("file") || "";
   
-    if (!reportTitle || !serviceManager || !reportType || !report || !dateRangeFrom || !dateRangeTo ) {
+    if (!reportTitle || !reportType || !report || !dateRangeFrom || !dateRangeTo ) {
       setFormError("All fields are required.");
       return;
     }
   
     const payload = {
       reportTitle,
-      serviceManager,
+      // serviceManager,
       reportType,
       dateRangeFrom,
       dateRangeTo,
       report,
-      // fileUrl,
+      fileUrl,
     };
   
     console.log("Submitting data:", payload);
@@ -84,6 +84,15 @@ const AddReport = () => {
             />
           </div>
           <div >
+            <label >Report Type</label>
+            <input
+              type="text"
+              required
+              placeholder=''
+              name='reportType'
+            />
+          </div>
+          {/* <div >
             <label >Created By</label>
             <select
               required
@@ -96,7 +105,7 @@ const AddReport = () => {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
           <div >
             <label >Date Range(from)</label>
             <input
@@ -113,15 +122,6 @@ const AddReport = () => {
               required
               placeholder=''
               name='dateRangeTo'
-            />
-          </div>
-          <div >
-            <label >Report Type</label>
-            <input
-              type="text"
-              required
-              placeholder=''
-              name='reportType'
             />
           </div>
           <div >

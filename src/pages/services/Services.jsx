@@ -26,6 +26,7 @@ const Services = () => {
   }
 
   const [isModalVisible, setModalVisible] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
   const [isViewVisible, setViewVisible] = useState(false)
   const [isDeleteVisible, setDeleteVisible] = useState(false)
   const [updateData, setUpdateData] = useState()
@@ -44,19 +45,31 @@ const Services = () => {
   const toggleDelete = () => setDeleteVisible(!isDeleteVisible)
 
 
+  const handleSearch = (term) => {
+    setSearchTerm(term.toLowerCase())
+  }
+
+      //filter
+  // Use filtered items for table
+    const filteredItems = fetchedData?.services?.filter((item) => {
+      const matchesSearch = item?.serviceName?.toLowerCase().includes(searchTerm);
+      // const matchesCategory = filterCategory === 'all' || item?.paymentOption === filterCategory;
+      return matchesSearch ;
+    });
 
     //pagination
     const [action, setAction] = useState({});
     // const [selectedRows, setSelectedRows] = useState([]);
     const actionRef = useRef(null);
   
-    // const itemsPerPage = 10;
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const totalPages = Math.ceil(fetchedData.length / itemsPerPage);
+    const itemsPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = filteredItems ? Math.ceil(filteredItems.length / itemsPerPage) : 0;
+
   
-    // const startIndex = (currentPage - 1) * itemsPerPage;
-    // const endIndex = Math.min(startIndex + itemsPerPage, fetchedData.length);
-    // const currentData = api.slice(startIndex, endIndex);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, filteredItems?.length);
+    const currentData = filteredItems?.slice(startIndex, endIndex);
   
         //navigation
         const goToPage = (page) => {
@@ -115,7 +128,7 @@ const Services = () => {
   const tableHead = ['Service Name','Price', 'Average TAT (Duration)', 'Service Manager', 'Phone Number', 'Date Added', 'Action']
   const tableContent =  
       <>
-        {fetchedData?.services?.map((product, idx) => (
+        {currentData.map((product, idx) => (
           <tr> {/* Ensure the key is unique */}
             <td>{product.serviceName}</td>
             <td>{product.price}</td>
@@ -172,8 +185,16 @@ const Services = () => {
 
   return (
     <div>
-        <SearchAndButtons pageName={'Service'} buttonName={'+ Add Service'} handleClick={goTo}/>
-        <Table  tableHead={tableHead} tableContent={tableContent}/>
+        <SearchAndButtons pageName={'Service'} buttonName={'+ Add Service'} handleClick={goTo} handleSearch={handleSearch} searchTerm={searchTerm}/>
+        <Table 
+         tableHead={tableHead} 
+         tableContent={tableContent}
+         currentPage={currentPage}
+         totalPages={totalPages}
+         itemsPerPage={itemsPerPage}
+         api={currentData}
+         startIndex={startIndex}
+          />
         {isModalVisible && 
         (
           <EditContent close={toggleEdit} data={updateData}/>

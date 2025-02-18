@@ -3,7 +3,7 @@ import SearchAndButtons from '../../features/searchAndButtons/SearchAndButtons'
 import Table from '../../features/reusables/Table'
 import { Navigate, useNavigate } from 'react-router'
 // import EditContent from '@src/components/EditViewDelete/EditContent'
-import EditContent from '../../components/EditViewDelete/EditService'
+import EditContent from '../../components/EditViewDelete/EditReport'
 import ViewContent from '../../components/EditViewDelete/ViewReport'
 import Delete from '../../features/reusables/EditViewDelete/Delete'
 import { useFetchResourceQuery, useDeleteResourceMutation } from '../../redux/api/generalApi'
@@ -16,6 +16,11 @@ const Reports = () => {
     error: accountError,
     isLoading: accountLoading,
   } = useFetchResourceQuery("/report/get");
+  const {
+    data: employeeData,
+    error: employeeError,
+    isLoading: employeeLoading,
+  } = useFetchResourceQuery("/employee/list");
   const [deleteResource] = useDeleteResourceMutation();
 
 
@@ -26,12 +31,14 @@ const Reports = () => {
   }
 
   const [isModalVisible, setModalVisible] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
   const [isViewVisible, setViewVisible] = useState(false)
   const [isDeleteVisible, setDeleteVisible] = useState(false)
   const [updateData, setUpdateData] = useState()
   const [viewData, setViewData] = useState()
   const [deleteData, setDeleteData] = useState()
   const [filteredClients, setFilteredClients] = useState([]);
+  const [filterCategory, setFilterCategory] = useState('all');
 
   const toggleEdit = (record) => {
     setModalVisible(!isModalVisible)
@@ -43,6 +50,17 @@ const Reports = () => {
   }
   const toggleDelete = () => setDeleteVisible(!isDeleteVisible)
 
+  const handleSearch = (term) => {
+    setSearchTerm(term.toLowerCase())
+  }
+
+      //filter
+  // Use filtered items for table
+    const filteredItems = fetchedData?.filter((item) => {
+      const matchesSearch = item?.reportTitle?.toLowerCase().includes(searchTerm);
+      // const matchesCategory = filterCategory === 'all' || item?.paymentOption === filterCategory;
+      return matchesSearch ;
+    });
 
 
     //pagination
@@ -50,13 +68,14 @@ const Reports = () => {
     // const [selectedRows, setSelectedRows] = useState([]);
     const actionRef = useRef(null);
   
-    // const itemsPerPage = 10;
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const totalPages = Math.ceil(fetchedData.length / itemsPerPage);
+    const itemsPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = filteredItems ? Math.ceil(filteredItems.length / itemsPerPage) : 0;
+
   
-    // const startIndex = (currentPage - 1) * itemsPerPage;
-    // const endIndex = Math.min(startIndex + itemsPerPage, fetchedData.length);
-    // const currentData = api.slice(startIndex, endIndex);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, filteredItems?.length);
+    const currentData = filteredItems?.slice(startIndex, endIndex);
   
         //navigation
         const goToPage = (page) => {
@@ -93,15 +112,13 @@ const Reports = () => {
   
     const handleDelete = async () => {
       try {
-        await deleteResource(`/service/delete/${deleteData}`).unwrap();
-        alert("Service detail deleted successfully");
+        await deleteResource(`/report/delete/${deleteData}`).unwrap();
+        alert("Report detail deleted successfully");
         toggleDelete();
-        setFilteredClients(
-          filteredClients.filter((service) => service.serviceId !== deleteData)
-        );
-        window.location.reload()
+        setFilteredClients((prev) => prev.filter(report => report.reportId !== deleteData));
+        // window.location.reload()
       } catch (err) {
-        console.error("Failed to delete Service:", err);
+        console.error("Failed to delete Report:", err);
       }
     };
 
@@ -115,14 +132,19 @@ const Reports = () => {
   const tableHead = ['Report Name','Report Type', 'Date Range', 'Created by',  'Document', 'Action']
   const tableContent =  
       <>
-        {fetchedData?.map((product, idx) => (
+        {currentData?.map((product, idx) => (
           <tr> {/* Ensure the key is unique */}
             <td>{product?.reportTitle}</td>
             <td>{product?.reportType}</td>
             <td>
               {product?.dateRangeFrom}<span className='font-extrabold '> - </span> {product?.dateRangeTo?.slice(0,10)}
             </td>
-            <td>{product?.serviceManager}</td>
+            <td>{employeeData?.getEmployees?.map((data) => {
+              return (
+                <p>{data.firstName } {data.lastName}</p>
+              )
+
+              })}</td>
             <td className='flex justify-center'><a href={product?.fileUrl} download={product?.reportTitle} target='_blank'><Download/></a></td>
             <td>
         <div onClick={() => openAction(idx)} className='relative text-center hover:cursor-pointer'>
@@ -155,7 +177,7 @@ const Reports = () => {
             <p
               // onClick={deleted}
               className="flex text-sm gap-3 hover:cursor-pointer"
-              onClick={() => handleAccountDelete(product.serviceId)}
+              onClick={() => handleAccountDelete(product.reportId)}
             >
               <Trash size={20} className='text-[250px]' />
               Delete
@@ -171,8 +193,17 @@ const Reports = () => {
 
   return (
     <div>
-        <SearchAndButtons pageName={'Report'} buttonName={'+ Add Report'} handleClick={goTo}/>
-        <Table  tableHead={tableHead} tableContent={tableContent}/>
+        <SearchAndButtons pageName={'Report'} buttonName={'+ Add Report'} handleClick={goTo} handleSearch={handleSearch} searchTerm={searchTerm}/>
+        <Table 
+         tableHead={tableHead} 
+         tableContent={tableContent}
+         currentPage={currentPage}
+         totalPages={totalPages}
+         itemsPerPage={itemsPerPage}
+         api={currentData}
+         startIndex={startIndex}
+
+         />
         {isModalVisible && 
         (
           <EditContent close={toggleEdit} data={updateData}/>
@@ -185,7 +216,7 @@ const Reports = () => {
         }
         {isDeleteVisible && 
         (
-          <Delete close={toggleDelete} page='service' deleted={handleDelete}/>
+          <Delete close={toggleDelete} page='report' deleted={handleDelete}/>
         )
         }
 

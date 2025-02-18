@@ -24,6 +24,7 @@ const Clients = () => {
   }
 
   const [isModalVisible, setModalVisible] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
   const [isViewVisible, setViewVisible] = useState(false)
   const [isDeleteVisible, setDeleteVisible] = useState(false)
   const [updateData, setUpdateData] = useState()
@@ -45,7 +46,17 @@ const Clients = () => {
 
 
 
+  const handleSearch = (term) => {
+    setSearchTerm(term.toLowerCase())
+  }
 
+      //filter
+  // Use filtered items for table
+    const filteredItems = fetchedData?.filter((item) => {
+      const matchesSearch = item?.name?.toLowerCase().includes(searchTerm);
+      // const matchesCategory = filterCategory === 'all' || item?.paymentOption === filterCategory;
+      return matchesSearch ;
+    });
 
 
 
@@ -55,13 +66,14 @@ const Clients = () => {
   // const [selectedRows, setSelectedRows] = useState([]);
   const actionRef = useRef(null);
 
-  // const itemsPerPage = 10;
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const totalPages = Math.ceil(fetchedData.length / itemsPerPage);
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = filteredItems ? Math.ceil(filteredItems.length / itemsPerPage) : 0;
 
-  // const startIndex = (currentPage - 1) * itemsPerPage;
-  // const endIndex = Math.min(startIndex + itemsPerPage, fetchedData.length);
-  // const currentData = api.slice(startIndex, endIndex);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = Math.min(startIndex + itemsPerPage, filteredItems?.length);
+  const currentData = filteredItems?.slice(startIndex, endIndex);
 
 
   //navigation
@@ -123,7 +135,7 @@ const Clients = () => {
   const tableHead = ['Client Name','Phone Number', 'Email Address', 'Address', 'Birthday', 'Category', 'Action']
   const tableContent =  
       <>
-        {fetchedData?.map((product, idx) => (
+        {currentData?.map((product, idx) => (
           <tr> {/* Ensure the key is unique */}
           <td>{product.name}</td>
             <td>{product.phoneNo}</td>
@@ -178,8 +190,16 @@ const Clients = () => {
 
   return (
     <div>
-      <SearchAndButtons pageName={'Clients'} buttonName={'+ Add Client'} handleClick={goTo}/>
-      <Table  tableHead={tableHead} tableContent={tableContent} />
+      <SearchAndButtons pageName={'Clients'} buttonName={'+ Add Client'} handleClick={goTo} handleSearch={handleSearch} searchTerm={searchTerm}/>
+      <Table 
+       tableHead={tableHead} 
+       tableContent={tableContent}
+       currentPage={currentPage}
+       totalPages={totalPages}
+       itemsPerPage={itemsPerPage}
+       api={currentData}
+       startIndex={startIndex}
+        />
       {isModalVisible && 
         
           <EditContent close={toggleEdit} data={updateData}/>

@@ -8,8 +8,10 @@ function SearchAndButtons({
   buttonName,
   buttonArray,
   SingleButtonIcon,
+  searchTerm,        // Receive searchTerm
+  handleSearch,      // Receive handleSearch
 }) {
-  const [searchTerm, setSearchTerm] = useState('')
+  // const [searchTerm, setSearchTerm] = useState('')
 
   return (
     <div className={styles.container}>
@@ -22,7 +24,7 @@ function SearchAndButtons({
           <input
             type="text"
             placeholder="Search by name"
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => handleSearch(e.target.value)}
             value={searchTerm}
             aria-label="Search by name"
             className={styles.searchInput}

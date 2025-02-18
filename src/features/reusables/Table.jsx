@@ -17,18 +17,23 @@ const Table = ({
   selectAllRows,
   tableHead,
   tableContent,
+  currentPage,
+  totalPages,
+  startIndex,
+  endIndex,
+  itemsPerPage,
 }) => {
   const [action, setAction] = useState({})
   // const [selectedRows, setSelectedRows] = useState([]);
-  const actionRef = useRef(null)
+  // const actionRef = useRef(null)
 
-  const itemsPerPage = 10
-  const [currentPage, setCurrentPage] = useState(1)
-  const totalPages = Math.ceil(api.length / itemsPerPage)
+  // const itemsPerPage = 10
+  // const [currentPage, setCurrentPage] = useState(1)
+  // const totalPages = Math.ceil(api.length / itemsPerPage)
 
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const endIndex = Math.min(startIndex + itemsPerPage, api.length)
-  const currentData = api.slice(startIndex, endIndex)
+  // const startIndex = (currentPage - 1) * itemsPerPage
+  // const endIndex = Math.min(startIndex + itemsPerPage, api.length)
+  // const currentData = api.slice(startIndex, endIndex)
 
   const goToPage = (page) => {
     setCurrentPage(page)
