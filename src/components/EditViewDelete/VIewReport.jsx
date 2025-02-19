@@ -1,44 +1,32 @@
 import View from '../../features/reusables/EditViewDelete/View'
 import React from 'react'
 
-const ViewTask = ({close, data}) => {
+const ViewReport = ({close, data}) => {
 
-  const isPDF = data?.fileUrl?.match(/\.pdf$/i);
-  const isImage = data?.fileUrl?.match(/\.(jpeg|jpg|png|gif|webp)$/i);
-  const isWordDoc = data?.fileUrl?.match(/\.(doc|docx)$/i);
+    const isPDF = data?.fileUrl?.match(/\.pdf$/i);
+    const isImage = data?.fileUrl?.match(/\.(jpeg|jpg|png|gif|webp)$/i);
+    const isWordDoc = data?.fileUrl?.match(/\.(doc|docx)$/i);
 
     const formContent = 
     <>
       <div>
-        <h3 >Task Name</h3>
-        <p>{data?.taskTitle}</p>
+        <h3 >Report Name</h3>
+        <p>{data?.reportTitle}</p>
       </div>
       <div>
-        <h3 >Service</h3>
-        <p>{data?.Service?.serviceName}</p>
+        <h3 >Report Type</h3>
+        <p>{data?.reportType}</p>
       </div>
       <div>
-        <h3 >Assigned To</h3>
-        <p>{data?.User?.firstName} {data?.User?.lastName} {data?.User?.email}</p>
+        <h3 >Date Range</h3>
+        <p>{data?.dateRangeFrom} <span className='font-extrabold text-xl'>-</span> {data?.dateRangeTo?.slice(0,10)}</p>
       </div>
       <div >
-        <h3 >Priority</h3>
-        <p>{data?.priority}</p>
+        <h3 >Created By</h3>
+        <p>{data?.serviceManager}</p>
       </div>
       <div>
-        <h3 >Due Date</h3>
-        <p>{data?.dueDate}</p>
-      </div>
-      <div>
-        <h3 >Task Status    </h3>
-        <p>{data?.taskStatus}</p>
-      </div>
-      <div>
-        <h3 >Description</h3>
-        <p>{data?.description}</p>
-      </div>
-      <div>
-        <h3 >File</h3>
+        <h3 >Document</h3>
         {
             isPDF ?
             (
@@ -47,7 +35,7 @@ const ViewTask = ({close, data}) => {
             :
             isImage ? 
             (
-                <img src={data?.fileUrl} alt="Report Preview" className=" max-w-xs h-[250px] w-[150px] rounded-lg shadow-md mt-2" />
+                <img src={data?.fileUrl} alt="Report Preview" className="w-full max-w-xs rounded-lg shadow-md mt-2" />
             )
             :
             isWordDoc ? 
@@ -70,9 +58,9 @@ const ViewTask = ({close, data}) => {
 
   return (
     <div>
-      <View close={close} formContenten = {formContent} header='Task Detail'/>
+      <View close={close} formContenten = {formContent} header='Report Details'/>
     </div>
   )
 }
 
-export default ViewTask
+export default ViewReport
