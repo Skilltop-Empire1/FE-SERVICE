@@ -7,7 +7,6 @@ import { useGetCapexQuery } from '@src/redux/api/accountApi'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { openModal } from '@src/redux/slices/modalSlice'
-import ModalManager from '@src/modals/expenseModal/modalManager'
 
 function Capex() {
   const { data: capexData, isLoading, isError } = useGetCapexQuery()
@@ -17,12 +16,14 @@ function Capex() {
   const dispatch = useDispatch()
 
   const handleView = (item) => {
-    dispatch(openModal({ modalType: 'VIEW_CAPEX', modalProps: item || {} }))
+    dispatch(
+      openModal({ modalType: 'VIEW_CAPEX', modalProp: item ? item : {} }),
+    )
     console.log('view capex data clicked', item)
   }
 
   const handleEdit = (item) => {
-    dispatch(openModal({ modalType: 'EDIT_CAPEX', modalProps: { item } }))
+    dispatch(openModal({ modalType: 'EDIT_CAPEX', modalProp: { item } }))
     console.log('Edit:', item)
   }
 
@@ -51,7 +52,7 @@ function Capex() {
         <td>{item.assetDescription}</td>
         <td>{`$${item.amount.toLocaleString()}`}</td>
         <td>{percentOfTotal.toFixed(2)}%</td>
-        <td>{formattedDate}</td>
+        <td>{formattedDate(item.dateOfExpenses)}</td>
         <td>{item.expectedLifeSpan} years</td>
         <td>{item.depreciationRate}%</td>
       </>
@@ -94,7 +95,6 @@ function Capex() {
           onDelete={handleDelete}
         />
       </main>
-      <ModalManager />
     </>
   )
 }
