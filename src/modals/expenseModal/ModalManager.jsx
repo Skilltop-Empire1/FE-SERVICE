@@ -15,6 +15,8 @@ function ModalManager() {
     (state) => state.expenseModal,
   )
 
+  console.log('ModalManager modalProp:', modalProp)
+
   if (!isOpen) return null
 
   const handleClose = () => dispatch(closeModal())

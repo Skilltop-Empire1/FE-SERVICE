@@ -3,11 +3,10 @@ import SearchAndButtons from '../../../features/searchAndButtons/SearchAndButton
 import { Plus } from 'lucide-react'
 import Table from '../../../components/dataTable/Table'
 import { opexHeaders } from '../../../components/dataTable/data'
-import { useGetOpexQuery } from '@src/redux/api/accountApi'
+import { useGetOpexQuery } from '../../../redux/api/accountApi'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { openModal } from '@src/redux/slices/modalSlice'
-import ModalManager from '@src/modals/expenseModal/modalManager'
+import { openModal } from '../../../redux/slices/modalSlice'
 
 function Opex() {
   const { data: opexData, isLoading, isError } = useGetOpexQuery()
@@ -17,12 +16,12 @@ function Opex() {
   const dispatch = useDispatch()
 
   const handleView = (item) => {
-    dispatch(openModal({ modalType: 'VIEW_OPEX', modalProps: { item } }))
+    dispatch(openModal({ modalType: 'VIEW_OPEX', modalProp: item }))
     console.log('View OPEX data clicked', item)
   }
 
   const handleEdit = (item) => {
-    dispatch(openModal({ modalType: 'EDIT_OPEX', modalProps: { item } }))
+    dispatch(openModal({ modalType: 'EDIT_OPEX', modalProp: item }))
     console.log('Edit:', item)
   }
 
@@ -30,7 +29,7 @@ function Opex() {
     console.log('Delete:', item)
   }
 
-  const totalExpense = opexData.reduce(
+  const totalExpense = opexData?.reduce(
     (total, item) => (total += item.amount),
     0,
   )
@@ -82,7 +81,6 @@ function Opex() {
           onDelete={handleDelete}
         />
       </main>
-      <ModalManager />
     </>
   )
 }

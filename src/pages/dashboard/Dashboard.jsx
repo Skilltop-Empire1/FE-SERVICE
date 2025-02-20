@@ -1,4 +1,4 @@
-import MetricCard from '../../components/selectOptions/businessMetricCard/metricCard'
+import MetricCard from '../../components/selectOptions/businessMetricCard/MetricCard'
 import SearchAndButtons from '../../features/searchAndButtons/SearchAndButtons'
 import { BriefcaseBusiness, Plus, Users } from 'lucide-react'
 import styles from './Dashboard.module.css'

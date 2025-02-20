@@ -3,6 +3,7 @@ import SideNav from '../../features/navbar/SideNav'
 import { Outlet } from 'react-router'
 
 import styles from './AppLayout.module.css'
+import ModalManager from '../../modals/expenseModal/ModalManager'
 
 function AppLayout() {
   return (
@@ -14,6 +15,7 @@ function AppLayout() {
           <Outlet />
         </main>
       </div>
+      <ModalManager />
     </div>
   )
 }
