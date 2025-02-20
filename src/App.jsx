@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-const AddOpex = lazy(()=>import('./pages/finance/opex/addOpex/AddOpex'))
-const AddCapex = lazy(()=>import('./pages/finance/capex/addCapex/AddCapex')).
+const AddOpex = lazy(() => import('./pages/finance/opex/addOpex/AddOpex'))
+const AddCapex = lazy(() => import('./pages/finance/capex/addCapex/AddCapex'))
 // Lazy load pages
 const Home = lazy(() => import('./pages/home/Home'))
 const Login = lazy(() => import('./pages/login/Login'))
