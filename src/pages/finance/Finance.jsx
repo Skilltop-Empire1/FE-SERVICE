@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import SelectOptions from '../../components/selectOptions/selectOptions'
+import SelectOptions from '../../components/selectOptions/SelectOptions'
 
 import styles from './Finance.module.css'
 import { Printer } from 'lucide-react'
