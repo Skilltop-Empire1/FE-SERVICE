@@ -16,12 +16,12 @@ function Opex() {
   const dispatch = useDispatch()
 
   const handleView = (item) => {
-    dispatch(openModal({ modalType: 'VIEW_OPEX', modalProps: { item } }))
+    dispatch(openModal({ modalType: 'VIEW_OPEX', modalProp: item }))
     console.log('View OPEX data clicked', item)
   }
 
   const handleEdit = (item) => {
-    dispatch(openModal({ modalType: 'EDIT_OPEX', modalProps: { item } }))
+    dispatch(openModal({ modalType: 'EDIT_OPEX', modalProp: item }))
     console.log('Edit:', item)
   }
 
@@ -29,7 +29,7 @@ function Opex() {
     console.log('Delete:', item)
   }
 
-  const totalExpense = opexData.reduce(
+  const totalExpense = opexData?.reduce(
     (total, item) => (total += item.amount),
     0,
   )
