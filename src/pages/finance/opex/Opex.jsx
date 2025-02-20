@@ -3,11 +3,10 @@ import SearchAndButtons from '../../../features/searchAndButtons/SearchAndButton
 import { Plus } from 'lucide-react'
 import Table from '../../../components/dataTable/Table'
 import { opexHeaders } from '../../../components/dataTable/data'
-import { useGetOpexQuery } from '@src/redux/api/accountApi'
+import { useGetOpexQuery } from '../../../redux/api/accountApi'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { openModal } from '@src/redux/slices/modalSlice'
-import ModalManager from '@src/modals/expenseModal/modalManager'
+import { openModal } from '../../../redux/slices/modalSlice'
 
 function Opex() {
   const { data: opexData, isLoading, isError } = useGetOpexQuery()
@@ -82,7 +81,6 @@ function Opex() {
           onDelete={handleDelete}
         />
       </main>
-      <ModalManager />
     </>
   )
 }
